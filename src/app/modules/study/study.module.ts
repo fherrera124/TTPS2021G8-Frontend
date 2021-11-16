@@ -20,6 +20,7 @@ import { RegisterSampleModalComponent} from './study-list/components/register-sa
 import { RegisterSamplePickupModalComponent } from './study-list/components/register-sample-pickup-modal/register-sample-pickup-modal';
 import { RegisterReportModalComponent } from './study-list/components/register-report-modal/register-report-modal.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { DetailStudyModalComponent } from './study-list/components/detail-study-modal/detail-study-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ShiftReservationModalComponent,
     RegisterSampleModalComponent,
     RegisterSamplePickupModalComponent,
-    RegisterReportModalComponent
+    RegisterReportModalComponent,
+    DetailStudyModalComponent
+
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ShiftReservationModalComponent,
     RegisterSampleModalComponent,
     RegisterSamplePickupModalComponent,
+    DetailStudyModalComponent
   ],
   exports: [ FroalaEditorModule, FroalaViewModule],
 

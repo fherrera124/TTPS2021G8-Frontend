@@ -18,7 +18,7 @@ import {
 
 import { EditStudyModalComponent } from './components/edit-study-modal/edit-study-modal.component';
 import { StudyListService, StudyService } from '../_services/study.service';
-import { StudyState } from '../_models/study.model';
+import { StudyList, StudyState } from '../_models/study.model';
 import { ConsentUploadModalComponent } from './components/consent-upload-modal/consent-upload-modal.component';
 import * as jQuery from 'jquery';
 import 'bootstrap-notify';
@@ -28,6 +28,7 @@ import { ShiftReservationModalComponent } from './components/shift-reservation-m
 import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { RegisterSamplePickupModalComponent } from './components/register-sample-pickup-modal/register-sample-pickup-modal';
 import { RegisterReportModalComponent } from './components/register-report-modal/register-report-modal.component';
+import { DetailStudyModalComponent } from './components/detail-study-modal/detail-study-modal.component';
 let $: any = jQuery;
 @Component({
   selector: 'app-study-list',
@@ -253,6 +254,11 @@ export class StudyListComponent
       ).catch((res) => {});
   }
 
+  detail(study: StudyList) {
+    const modalRef = this.modalService.open(DetailStudyModalComponent
+      , { size: 'xl',keyboard: false});
+    modalRef.componentInstance.study = study;
+  }
 
   registerSamplePickup(idStudy: number) {
     const modalRef = this.modalService.open(RegisterSamplePickupModalComponent
@@ -273,5 +279,4 @@ export class StudyListComponent
         () => { }
       ).catch((res) => {});
   }
-
 }
