@@ -71,6 +71,20 @@ export const DynamicAsideMenuConfig = {
       ]
     },
     {
+          title: 'Extracciones',
+          root: true,
+          bullet: 'dot',
+          icon: 'flaticon2-user-outline-symbol',
+          svg: './assets/media/svg/icons/General/User.svg',
+          page: '/studies',
+          submenu: [
+            {
+              title: 'Liquidación de extracciones',
+              page: '/sample-clearance/sample-clearance'
+            },
+          ]
+     },
+    {
       title: 'Tipo de estudios',
       root: true,
       bullet: 'dot',

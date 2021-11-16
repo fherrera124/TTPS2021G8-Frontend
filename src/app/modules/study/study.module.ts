@@ -1,11 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InlineSVGModule } from 'ng-inline-svg';
-
 import { CRUDTableModule } from '../../_metronic/shared/crud-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
 import { NgbDatepickerModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditStudyModalComponent } from './study-list/components/edit-study-modal/edit-study-modal.component';
 import { StudyRoutingModule } from './study-routing.module';
@@ -20,6 +18,8 @@ import { RegisterSampleModalComponent} from './study-list/components/register-sa
 import { RegisterSamplePickupModalComponent } from './study-list/components/register-sample-pickup-modal/register-sample-pickup-modal';
 import { RegisterReportModalComponent } from './study-list/components/register-report-modal/register-report-modal.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ConfirmSendReportModalComponent } from './study-list/components/confirm-send-report-modal/confirm-send-rerport-modal';
+import { DetailStudyModalComponent } from './study-list/components/detail-study-modal/detail-study-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,10 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ShiftReservationModalComponent,
     RegisterSampleModalComponent,
     RegisterSamplePickupModalComponent,
-    RegisterReportModalComponent
+    RegisterReportModalComponent,
+    ConfirmSendReportModalComponent
+    DetailStudyModalComponent
+
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     ShiftReservationModalComponent,
     RegisterSampleModalComponent,
     RegisterSamplePickupModalComponent,
+    ConfirmSendReportModalComponent
+    DetailStudyModalComponent
   ],
   exports: [ FroalaEditorModule, FroalaViewModule],
 

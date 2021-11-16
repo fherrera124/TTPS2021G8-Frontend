@@ -34,6 +34,13 @@ const routes: Routes = [
           ),
       },
       {
+          path: 'sample-clearance',
+          loadChildren: () =>
+            import('../modules/sample_clearance/sample-clearance.module').then(
+              (m) => m.SampleClearanceModule
+            ),
+},
+      {
         path: 'type-studies',
         loadChildren: () =>
           import('../modules/type_study/type-study.module').then(

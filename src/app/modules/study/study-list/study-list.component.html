@@ -58,11 +58,17 @@
             <tr *ngFor="let study of studyListService.items$ | async">
               <td>{{ study.type_study.name }}</td>
               <td>{{ study.current_state}}</td>
-              <td>{{ study.patient.first_name }} {{ study.patient.first_name }} </td>
-              <td>{{ study.referring_physician.first_name }} {{ study.referring_physician.first_name }} </td>
+              <td>{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
+              <td>{{ study.referring_physician.first_name }} {{ study.referring_physician.last_name }} </td>
               <td>{{ study.presumptive_diagnosis.name }}</td>
               <td>{{ study.budget }}</td>
               <td style="display: flex;">
+                <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="detail(study)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>
+                </a>
                 <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
                   (click)="edit(study.id)">
                   <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
@@ -98,7 +104,13 @@
                 <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Esperando retiro de muestra"
                 class="svg-icon svg-icon-md svg-icon-primary">
                  </span>
-              </a>
+                </a>
+                <a *ngIf="study.current_state === studyState.STATE_TEN" title="Envíar reporte" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="confirmSendReport(study.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Envíar reporte"
+                class="svg-icon svg-icon-md svg-icon-primary">
+                 </span>
+                </a>
               </td>
             </tr>
           </tbody>
