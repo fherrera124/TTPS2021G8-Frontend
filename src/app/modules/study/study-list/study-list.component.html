@@ -104,7 +104,13 @@
                 <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Esperando retiro de muestra"
                 class="svg-icon svg-icon-md svg-icon-primary">
                  </span>
-              </a>
+                </a>
+                <a *ngIf="study.current_state === studyState.STATE_TEN" title="Envíar reporte" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="confirmSendReport(study.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Envíar reporte"
+                class="svg-icon svg-icon-md svg-icon-primary">
+                 </span>
+                </a>
               </td>
             </tr>
           </tbody>
