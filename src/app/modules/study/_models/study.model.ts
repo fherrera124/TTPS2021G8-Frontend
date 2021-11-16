@@ -1,6 +1,8 @@
 import { Patient } from './../../patient/_models/patient.model';
 import { BaseModel } from '../../../_metronic/shared/crud-table';
 import { ReferringPhysician } from '../../referring_physician/_models/referring-physician.model';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+import { NumericLiteral } from 'typescript';
 
 export enum StudyState {
     STATE_ONE = "Esperando comprobante de pago",
@@ -50,6 +52,19 @@ export class Study implements BaseModel {
     }
 }  
 
+export interface Employee {
+  username: string,
+  first_name: string,
+  last_name: string,
+  is_active: boolean
+
+}
+export interface State{
+  id: number,
+  employee: Employee,
+  state: string,
+  state_entered_date: string,
+}  
 export interface StudyList{
   id: number,
   referring_physician: ReferringPhysician,
@@ -59,4 +74,5 @@ export interface StudyList{
   budget: number,
   report: string,
   current_state: string
+  states: State[]
 }
