@@ -1,0 +1,78 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Liquidación de extracciones</h3>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- begin: Filtration form -->
+    <div class="form form-label-right">
+      <div class="form-group row">
+        <form class="col-lg-6" [formGroup]="searchGroup">
+          <input type="text" class="form-control" name="searchText" placeholder="Buscar" value=""
+            formControlName="searchTerm" /><small class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
+        </form>
+  
+      </div>
+    </div>
+    <div class="row" style="float: right;">
+      <button type="button" (click)="process()" [disabled]="selectedIds.length === 0" class="btn btn-primary btn-elevate mr-2"> Liquidar </button>
+    </div>
+
+    <!-- end: Filtration form -->
+    <!-- begin:Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Nro lote
+            <app-sort-icon column="sample_batch_id" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Fecha de toma de muestra
+            <app-sort-icon column="picked_up_date" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Extraccionista
+            <app-sort-icon column="picked_up_by" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>
+            Ml extraídos
+            <app-sort-icon column="ml_extracted" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          
+          <th>
+            Nro de freezer
+            <app-sort-icon column="freezer_number" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+              (sort)="sort($event)"></app-sort-icon>
+          </th>
+          <th>Acciones</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sampleClearance of sampleClearanceService.items$ | async">
+            <td>{{ sampleClearance.sample_batch_id}}</td>
+            <td>{{ sampleClearance.picked_up_date}}</td>
+            <td>{{ sampleClearance.picked_up_by}}</td>
+            <td>{{ sampleClearance.ml_extracted}}</td>
+            <td>{{ sampleClearance.freezer_number}}</td>
+            <td style="display: flex;">
+              <a title="Procesar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                <span  title="Procesar">
+                  <input type="checkbox" (change)="changeSample($event,sampleClearance.id)">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- end: Table -->
+    <app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+      [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+  </div>
+  
+</div>
