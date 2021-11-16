@@ -34,6 +34,9 @@ export class InputFormComponent {
   
     isControlInvalid(controlName: string): boolean {
       const control = this.formGroup.controls[controlName];
+      if (controlName === 'email'){
+        const control = this.formGroup.controls.email
+      }  
       return control.invalid && (control.dirty || control.touched);
     }
   
