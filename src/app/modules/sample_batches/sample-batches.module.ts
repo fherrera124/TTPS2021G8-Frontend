@@ -19,7 +19,7 @@ import { SampleBatchesModalProcessComponent } from './sample-batches-list/compon
   declarations: [
     SampleBatchesComponent,
     SampleBatchesListComponent,
-    SampleBatchesModalProcessComponent
+    SampleBatchesModalProcessComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +36,7 @@ import { SampleBatchesModalProcessComponent } from './sample-batches-list/compon
    
   ],
   entryComponents: [
-    SampleBatchesListComponent,SampleBatchesModalProcessComponent
+    SampleBatchesListComponent,SampleBatchesModalProcessComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
