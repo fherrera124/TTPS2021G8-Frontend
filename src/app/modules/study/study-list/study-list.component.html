@@ -55,31 +55,6 @@
           <th>Acciones</th>
         </thead>
         <tbody>
-          <tr *ngFor="let study of studyListService.items$ | async">
-            <td>{{ study.type_study.name }}</td>
-            <td>{{ study.current_state}}</td>
-            <td>{{ study.patient.first_name }} {{ study.patient.first_name }} </td>
-            <td>{{ study.referring_physician.first_name }} {{ study.referring_physician.first_name }} </td>
-            <td>{{ study.presumptive_diagnosis.name }}</td>
-            <td>{{ study.budget }}</td>
-            <td style="display: flex;">
-              <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                (click)="edit(study.id)">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-            </th>
-            <th>
-                Diagnóstico presuntivo
-                <app-sort-icon column="presumptive_diagnosis" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
-                  (sort)="sort($event)"></app-sort-icon>
-            </th>
-            <th>
-                Presupuesto
-                <app-sort-icon column="budget" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
-                  (sort)="sort($event)"></app-sort-icon>
-            </th>
-            <th>Acciones</th>
-          </thead>
-          <tbody>
             <tr *ngFor="let study of studyListService.items$ | async">
               <td>{{ study.type_study.name }}</td>
               <td>{{ study.current_state}}</td>
