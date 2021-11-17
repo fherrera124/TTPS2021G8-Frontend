@@ -49,7 +49,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-      roles: ['EMPLOYEE','REPORTING_PHYSICIAN'],
+      roles: ['EMPLOYEE','REPORTING_PHYSICIAN','ADMIN'],
       submenu: [
         {
           title: 'Lista de Estudios',
@@ -94,7 +94,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-      roles: ['EMPLOYEE'],
+      roles: ['EMPLOYEE','ADMIN'],
       submenu: [
         {
           title: 'Lista de médicos derivantes',

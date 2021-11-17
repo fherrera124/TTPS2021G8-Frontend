@@ -72,6 +72,7 @@ export interface StudyList{
   presumptive_diagnosis:Diagnosis,
   budget: number,
   report: string,
-  current_state: string
-  states: State[]
+  current_state: string,
+  states: State[],
+  employee: Employee
 }

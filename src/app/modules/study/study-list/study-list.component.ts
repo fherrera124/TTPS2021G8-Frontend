@@ -56,6 +56,7 @@ export class StudyListComponent
   public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
+  public filterState:string;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -85,7 +86,8 @@ export class StudyListComponent
     this.filterGroup = this.fb.group({
       status: [''],
       type: [''],
-      searchTerm: [''],
+      searchTerm: ['']
+
     });
     this.subscriptions.push(
       this.filterGroup.controls.status.valueChanges.subscribe(() =>
@@ -130,6 +132,7 @@ export class StudyListComponent
   }
 
   search(searchTerm: string) {
+    searchTerm = searchTerm.toLowerCase();
     this.studyListService.patchState({ searchTerm });
   }
 
@@ -305,4 +308,12 @@ export class StudyListComponent
         () => { }
       ).catch((res) => {});
   }
+
+  downloadBudget(idStudy: number) {
+      this.studyService.downloadBudget(idStudy).subscribe(blobConsent => {
+      const fileURL = URL.createObjectURL(blobConsent);
+      window.open(fileURL, '_blank');
+      });
+  }
+
 }

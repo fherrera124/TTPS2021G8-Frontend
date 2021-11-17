@@ -19,6 +19,8 @@ import 'bootstrap-notify';
 import { CrudOperation } from '../../shared/utils/crud-operation.model';
 import { ReferringPhysicianService } from '../_services';
 import { EditReferringPhysicianModalComponent } from './components/edit-referring-physician-modal/edit-referring-physician-modal.component';
+import { DeleteModalComponent } from './components/delete-referring-physician-modal/delete-modal.component';
+
 let $: any = jQuery;
 @Component({
   selector: 'app-referring-physician-list',
@@ -157,4 +159,9 @@ export class ReferringPhysicianListComponent
       () => { }
     );
   }
+    delete(id: number) {
+      const modalRef = this.modalService.open(DeleteModalComponent);
+      modalRef.componentInstance.id = id;
+      modalRef.result.then(() => this.referringPhysicianService.fetch(), () => { });
+    }
 }

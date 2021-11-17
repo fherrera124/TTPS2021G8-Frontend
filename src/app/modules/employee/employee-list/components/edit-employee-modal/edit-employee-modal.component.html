@@ -5,7 +5,7 @@
       <ng-container *ngIf="employee">
         <ng-container *ngIf="employee.id">Editar</ng-container>
         <ng-container *ngIf="!employee.id">Crear</ng-container>
-        Paciente
+        Empleado
         <ng-container *ngIf="employee.id"
           >'{{ employee.first_name }} {{ employee.last_name }}'</ng-container
         >
@@ -46,6 +46,9 @@
       </form>
       <div *ngIf="isPasswordErroneus" class="alert alert-danger" role="alert">
         Las contraseñas difieren.
+      </div>
+      <div *ngIf="error !== undefined" class="alert alert-danger" role="alert">
+        {{error}}
       </div>
     </ng-container>
   </div>

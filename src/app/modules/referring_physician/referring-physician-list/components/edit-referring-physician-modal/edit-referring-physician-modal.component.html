@@ -4,7 +4,7 @@
       <ng-container *ngIf="referringPhysician">
         <ng-container *ngIf="referringPhysician.id">Editar</ng-container>
         <ng-container *ngIf="!referringPhysician.id">Crear</ng-container>
-        Paciente
+        Médico derivante
         <ng-container *ngIf="referringPhysician.id"
           >'{{ referringPhysician.first_name }} {{ referringPhysician.last_name }}'</ng-container
         >
@@ -43,6 +43,9 @@
           </div>
         </div>
       </form>
+      <div *ngIf="error !== undefined" class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
     </ng-container>
   </div>
   <div class="modal-footer">
