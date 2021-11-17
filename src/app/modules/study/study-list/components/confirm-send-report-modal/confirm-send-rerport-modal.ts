@@ -15,12 +15,12 @@ let $: any = jQuery;
   export class ConfirmSendReportModalComponent {
     constructor(public modal: NgbActiveModal, private studyService: StudyService) 
     {}
-    @Input() studyId: number;
+    @Input() idStudy: number;
     
     send(): void {
-        this.studyService.sendReport(this.studyId).subscribe(
+        this.studyService.sendReport(this.idStudy).subscribe(
             rpta => this.modal.close({status:CrudOperation.SUCCESS})
         )
-    };
+    };I
        }
     

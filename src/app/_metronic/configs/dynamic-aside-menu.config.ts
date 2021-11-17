@@ -49,7 +49,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-      roles: ['EMPLOYEE','REPORTING_PHYSICIAN','ADMIN'],
+      roles: ['EMPLOYEE','REPORTING_PHYSICIAN'],
       submenu: [
         {
           title: 'Lista de Estudios',
@@ -64,7 +64,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-      roles: ['EMPLOYEE'],
+      roles: ['EMPLOYEE','ADMIN'],
       submenu: [
         {
           title: 'Lista de Lotes',
@@ -89,6 +89,22 @@ export const DynamicAsideMenuConfig = {
      },
      {
       title: 'Médico derivante',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/General/User.svg',
+      page: '/studies',
+      roles: ['EMPLOYEE'],
+      submenu: [
+        {
+          title: 'Lista de médicos derivantes',
+          page: '/referring-physician/referring-physician'
+        },
+      ]
+ },
+ ,
+     {
+      title: 'Médico informante',
       root: true,
       bullet: 'dot',
       icon: 'flaticon2-user-outline-symbol',
