@@ -197,9 +197,9 @@ export class StudyListComponent
     modalRef.componentInstance.idStudy = idStudy;
     modalRef.result.then((result) =>
       {
-        this.studyListService.fetch();
         
         if (result.status === CrudOperation.SUCCESS) {
+          setTimeout(()=>{this.studyListService.fetch()}, 2000)
           $.notify({
             title: '<strong>Registro exitoso.</strong>',
             message: 'Se ha registrado correctamente el consentimiento firmado'
