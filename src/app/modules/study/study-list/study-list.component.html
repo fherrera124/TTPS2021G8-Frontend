@@ -12,25 +12,30 @@
     <div class="form form-label-right">
       <div class="form-group row">
         <form class="col-lg-6" [formGroup]="searchGroup">
-          <input type="text" class="form-control" name="searchText" placeholder="Buscar" value=""
-            formControlName="searchTerm" /><small class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
-            <br>
-            <select [formGroup]="searchGroup" formControlName="filterState" class="form-control form-control-lg"  name="filterState" [(ngModel)]="filterState"> 
-              <option value="studyState.STATE_ONE">{{studyState.STATE_ONE}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_TWO}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_THREE}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_FOUR}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_FIVE}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_SIX}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_SEVEN}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_EIGHT}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_NINE}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_ENDED}}</option>
-              <option value="studyState.STATE_ONE">{{studyState.STATE_ENDED}}</option>
-          </select>
-            <small class="form-text text-muted"><b>Filtrar</b> por estado</small>  
+          <input type="text" *ngIf="!isSearchingByState"  class="form-control" name="searchText" placeholder="Buscar" value=""
+            formControlName="searchTerm" /><small *ngIf="!isSearchingByState" class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
         </form>
+        <br>
       </div>
+      <div class="row">
+        <div class="col-lg-6" >
+          <select (change)="filterStatus()" *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" [disabled]="searchData !==''" [(ngModel)]="filterState" class="form-control form-control-lg"  name="filterState"> 
+            <option value="Seleccione un estado" selected>Seleccione un estado</option>
+            <option value="{{studyState.STATE_ONE}}">{{studyState.STATE_ONE}}</option>
+            <option value="{{studyState.STATE_TWO}}">{{studyState.STATE_TWO}}</option>
+            <option value="{{studyState.STATE_THREE}}">{{studyState.STATE_THREE}}</option>
+            <option value="{{studyState.STATE_FOUR}}">{{studyState.STATE_FOUR}}</option>
+            <option value="{{studyState.STATE_FIVE}}">{{studyState.STATE_FIVE}}</option>
+            <option value="{{studyState.STATE_SIX}}">{{studyState.STATE_SIX}}</option>
+            <option value="{{studyState.STATE_SEVEN}}">{{studyState.STATE_SEVEN}}</option>
+            <option value="{{studyState.STATE_EIGHT}}">{{studyState.STATE_EIGHT}}</option>
+            <option value="{{studyState.STATE_NINE}}">{{studyState.STATE_NINE}}</option>
+            <option value="{{studyState.STATE_ENDED}}">{{studyState.STATE_ENDED}}</option>
+        </select>
+        <small *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" class="form-text text-muted"><b>Filtrar</b> por estado</small>  
+      </div>        
+    </div>
+
     </div>
     <!-- end: Filtration form -->
     <!-- begin:Table -->

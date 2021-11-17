@@ -56,7 +56,9 @@ export class StudyListComponent
   public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
-  public filterState:string;
+  public filterState:string="Seleccione un estado";
+  public isSearchingByState = false;
+  public searchData:string="";
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -87,6 +89,7 @@ export class StudyListComponent
       status: [''],
       type: [''],
       searchTerm: ['']
+     
 
     });
     this.subscriptions.push(
@@ -127,8 +130,20 @@ export class StudyListComponent
         debounceTime(150),
         distinctUntilChanged()
       )
-      .subscribe((val) => this.search(val));
+      .subscribe((val) => {
+        this.searchData = val;
+      this.search(val)});
     this.subscriptions.push(searchEvent);
+  }
+  filterStatus(){
+    if(this.filterState !== 'Seleccione un estado') {
+        this.search(this.filterState);
+        this.isSearchingByState = true
+    }   
+    else {
+      this.search('');
+      this.isSearchingByState = false;
+    }
   }
 
   search(searchTerm: string) {
