@@ -6,7 +6,7 @@ import { AuthModel } from '../_models/auth.model';
 import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-
+import jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
@@ -47,6 +47,8 @@ export class AuthService implements OnDestroy {
     this.isLoadingSubject.next(true);
     return this.authHttpService.login(email, password).pipe(
       map((auth: AuthModel) => {
+        const decode_auth:any = jwt_decode(auth.access_token);
+        auth.role = decode_auth.role;
         const result = this.setAuthFromLocalStorage(auth);
         return result;
       }),
