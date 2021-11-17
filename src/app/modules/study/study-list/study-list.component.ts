@@ -28,6 +28,7 @@ import { ShiftReservationModalComponent } from './components/shift-reservation-m
 import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { RegisterSamplePickupModalComponent } from './components/register-sample-pickup-modal/register-sample-pickup-modal';
 import { RegisterReportModalComponent } from './components/register-report-modal/register-report-modal.component';
+import { ConfirmSendReportModalComponent } from './components/confirm-send-report-modal/confirm-send-rerport-modal';
 let $: any = jQuery;
 @Component({
   selector: 'app-study-list',
@@ -274,4 +275,24 @@ export class StudyListComponent
       ).catch((res) => {});
   }
 
+
+  confirmSendReport(idStudy: number) {
+    const modalRef = this.modalService.open(ConfirmSendReportModalComponent
+      , { size: 'xs',keyboard: false});
+    modalRef.componentInstance.idStudy = idStudy;
+    modalRef.result.then((result) =>{
+        this.studyListService.fetch();
+        if (result.status === CrudOperation.SUCCESS) {
+          $.notify({
+            title: '<strong>Registro exitoso.</strong>',
+            message: 'Se ha registrado ha enviado el reporte exitosamente'
+          }, {
+            type: 'success'
+          }),
+        () => { }
+      }
+    },
+        () => { }
+      ).catch((res) => {});
+  }
 }

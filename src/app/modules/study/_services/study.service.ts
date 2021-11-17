@@ -51,6 +51,10 @@ export class StudyService extends TableService<Study> implements OnDestroy {
     return this.http.post(this.API_URL+'/'+studyId+'/add-report', {result: result, report : report });
   }
   
+  sendReport(studyId: number): Observable<any> {
+    return this.http.post(this.API_URL+'/'+studyId+'/send-report', studyId);
+  }
+  
 }
 
 @Injectable({
