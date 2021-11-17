@@ -6,28 +6,11 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-architecture-and-city',
       svg: './assets/media/svg/icons/Design/Layers.svg',
       page: '/dashboard',
+      roles: ['ANONYMOUS'],
       translate: 'MENU.DASHBOARD',
       bullet: 'dot',
     },
-    { section: 'Applications' },
-    {
-      title: 'User Management',
-      root: true,
-      bullet: 'dot',
-      icon: 'flaticon2-user-outline-symbol',
-      svg: './assets/media/svg/icons/General/User.svg',
-      page: '/user-management',
-      submenu: [
-        {
-          title: 'Users',
-          page: '/user-management/users'
-        },
-        {
-          title: 'Roles',
-          page: '/user-management/roles'
-        }
-      ]
-    },
+    { section: 'Applications', roles: ['ANONYMOUS'] },
     {
       title: 'Pacientes',
       root: true,
@@ -35,6 +18,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/patients',
+      roles: ['EMPLOYEE'],
       submenu: [
         {
           title: 'Lista de Pacientes',
@@ -49,6 +33,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
+      roles: ['EMPLOYEE','REPORTING_PHYSICIAN'],
       submenu: [
         {
           title: 'Lista de Estudios',
@@ -63,6 +48,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
+      roles: ['EMPLOYEE'],
       submenu: [
         {
           title: 'Lista de Lotes',
@@ -77,6 +63,7 @@ export const DynamicAsideMenuConfig = {
           icon: 'flaticon2-user-outline-symbol',
           svg: './assets/media/svg/icons/General/User.svg',
           page: '/studies',
+          roles: ['EMPLOYEE'],
           submenu: [
             {
               title: 'Liquidación de extracciones',
@@ -91,6 +78,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/type-studies',
+      roles: ['CONFIGURATOR'],
       submenu: [
         {
           title: 'Lista de tipo de estudios',
