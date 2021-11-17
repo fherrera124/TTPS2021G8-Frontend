@@ -26,6 +26,22 @@ export const DynamicAsideMenuConfig = {
         },
       ]
     },
+    ,
+    {
+      title: 'Empleados',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/General/User.svg',
+      page: '/employees',
+      roles: ['CONFIGURATOR','ADMIN'],
+      submenu: [
+        {
+          title: 'Lista de Empleado',
+          page: '/employees/employees'
+        },
+      ]
+    },
     {
       title: 'Estudios',
       root: true,
@@ -78,6 +94,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
+      roles: ['EMPLOYEE'],
       submenu: [
         {
           title: 'Lista de médicos derivantes',

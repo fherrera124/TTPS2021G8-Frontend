@@ -27,6 +27,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'employees',
+        loadChildren: () =>
+          import('../modules/employee/employee.module').then(
+            (m) => m.EmployeeModule
+          ),
+      },
+
+      {
         path: 'studies',
         loadChildren: () =>
           import('../modules/study/study.module').then(
