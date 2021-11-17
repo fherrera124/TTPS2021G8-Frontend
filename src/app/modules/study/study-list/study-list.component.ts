@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/modules/auth';
 // tslint:disable:no-string-literal
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -25,9 +26,9 @@ import 'bootstrap-notify';
 import { CrudOperation } from '../../shared/utils/crud-operation.model';
 import { PaymentUploadModalComponent } from './components/payment-upload-modal/payment-upload-modal.component';
 import { ShiftReservationModalComponent } from './components/shift-reservation-modal/shift-reservation-modal.component';
-import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { RegisterSamplePickupModalComponent } from './components/register-sample-pickup-modal/register-sample-pickup-modal';
 import { RegisterReportModalComponent } from './components/register-report-modal/register-report-modal.component';
+import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { ConfirmSendReportModalComponent } from './components/confirm-send-report-modal/confirm-send-rerport-modal';
 let $: any = jQuery;
 @Component({
@@ -51,16 +52,19 @@ export class StudyListComponent
   isLoading: boolean;
   filterGroup: FormGroup;
   searchGroup: FormGroup;
+  public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
     public studyListService: StudyListService,
-    public studyService: StudyService
+    public studyService: StudyService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.userRol = this.authService.getAuthFromLocalStorage().role;
     this.filterForm();
     this.searchForm();
     this.studyListService.fetch();
@@ -69,6 +73,7 @@ export class StudyListComponent
     this.sorting = this.studyListService.sorting;
     const sb = this.studyListService.isLoading$.subscribe(res => this.isLoading = res);
     this.subscriptions.push(sb);
+    
   }
 
   ngOnDestroy() {
@@ -217,7 +222,7 @@ export class StudyListComponent
   }
   
   registerSample(idStudy: number) {
-    const modalRef = this.modalService.open(RegisterReportModalComponent, { size: 'xl',keyboard: false});
+    const modalRef = this.modalService.open(RegisterSampleModalComponent, { size: 'xl',keyboard: false});
     modalRef.componentInstance.idStudy = idStudy;
     modalRef.result.then((result) =>{
         this.studyListService.fetch();
@@ -274,8 +279,7 @@ export class StudyListComponent
         () => { }
       ).catch((res) => {});
   }
-
-
+  
   confirmSendReport(idStudy: number) {
     const modalRef = this.modalService.open(ConfirmSendReportModalComponent
       , { size: 'xs',keyboard: false});

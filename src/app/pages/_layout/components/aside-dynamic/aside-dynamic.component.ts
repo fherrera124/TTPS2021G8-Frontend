@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/modules/auth';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -26,10 +27,12 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
 
   currentUrl: string;
 
+
   constructor(
     private layout: LayoutService,
     private router: Router,
     private menu: DynamicAsideMenuService,
+    private authService:AuthService,
     private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -61,7 +64,10 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
 
     // menu load
     const menuSubscr = this.menu.menuConfig$.subscribe(res => {
-      this.menuConfig = res;
+      const filter_menu_items = res.items.filter(item => item.roles.includes('ANONYMOUS'));
+      //const  filter_menu_items = [ ...res.items.filter(item => item.roles.includes('ANONYMOUS')), ...res.items.filter(item => item.roles.includes(this.authService.getAuthFromLocalStorage().role))];
+      console.log(filter_menu_items);
+      this.menuConfig = {items: filter_menu_items};
       this.cdr.detectChanges();
     });
     this.subscriptions.push(menuSubscr);
