@@ -33,7 +33,8 @@ const routes: Routes = [
             (m) => m.EmployeeModule
           ),
       },
-
+      
+      
       {
         path: 'studies',
         loadChildren: () =>
@@ -41,6 +42,14 @@ const routes: Routes = [
             (m) => m.StudyModule
           ),
       },
+      {
+        path: 'sample-batches',
+        loadChildren: () =>
+          import('../modules/sample_batches/sample-batches.module').then(
+            (m) => m.SampleBatchesModule
+          ),
+    },
+
       {
           path: 'sample-clearance',
           loadChildren: () =>

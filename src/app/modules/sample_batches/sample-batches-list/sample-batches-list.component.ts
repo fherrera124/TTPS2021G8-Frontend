@@ -1,8 +1,9 @@
+import { SampleBatchesService } from '../_service/sample-batches.service';
 // tslint:disable:no-string-literal
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   GroupingState,
@@ -17,16 +18,14 @@ import {
 import * as jQuery from 'jquery';
 import 'bootstrap-notify';
 import { CrudOperation } from '../../shared/utils/crud-operation.model';
-import { ReferringPhysicianService } from '../_services';
-import { EditReferringPhysicianModalComponent } from './components/edit-referring-physician-modal/edit-referring-physician-modal.component';
-import { DeleteModalComponent } from './components/delete-referring-physician-modal/delete-modal.component';
-
+import { SampleBatchesState } from '../_model/sample-batches.model';
+import { SampleBatchesModalProcessComponent } from './component/sample-batches-process-modal/sample-batches-process-modal';
 let $: any = jQuery;
 @Component({
-  selector: 'app-referring-physician-list',
-  templateUrl: './referring-physician-list.component.html',
+  selector: 'app-sample-batches-list',
+  templateUrl: './sample-batches-list.component.html',
 })
-export class ReferringPhysicianListComponent
+export class SampleBatchesListComponent
   implements
   OnInit,
   OnDestroy,
@@ -41,23 +40,22 @@ export class ReferringPhysicianListComponent
   isLoading: boolean;
   filterGroup: FormGroup;
   searchGroup: FormGroup;
-  public selectedIds:number[] = [];
   private subscriptions: Subscription[] = [];
-  //public sampleBatchesState: typeof SampleBatchesState = SampleBatchesState;
+  public sampleBatchesState: typeof SampleBatchesState = SampleBatchesState;
   constructor(
     private fb: FormBuilder,
-    public referringPhysicianService: ReferringPhysicianService,
+    public sampleBatchesService: SampleBatchesService,
     private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
     this.filterForm();
     this.searchForm();
-    this.referringPhysicianService.fetch();
-    this.grouping = this.referringPhysicianService.grouping;
-    this.paginator = this.referringPhysicianService.paginator;
-    this.sorting = this.referringPhysicianService.sorting;
-    const sb = this.referringPhysicianService.isLoading$.subscribe(res => this.isLoading = res);
+    this.sampleBatchesService.fetch();
+    this.grouping = this.sampleBatchesService.grouping;
+    this.paginator = this.sampleBatchesService.paginator;
+    this.sorting = this.sampleBatchesService.sorting;
+    const sb = this.sampleBatchesService.isLoading$.subscribe(res => this.isLoading = res);
     this.subscriptions.push(sb);
   }
 
@@ -92,7 +90,7 @@ export class ReferringPhysicianListComponent
     if (type) {
       filter['type'] = type;
     }
-    this.referringPhysicianService.patchState({ filter });
+    this.sampleBatchesService.patchState({ filter });
   }
 
   // search
@@ -114,7 +112,7 @@ export class ReferringPhysicianListComponent
   }
 
   search(searchTerm: string) {
-    this.referringPhysicianService.patchState({ searchTerm });
+    this.sampleBatchesService.patchState({ searchTerm });
   }
 
   // sorting
@@ -127,41 +125,31 @@ export class ReferringPhysicianListComponent
     } else {
       sorting.direction = sorting.direction === 'asc' ? 'desc' : 'asc';
     }
-    this.referringPhysicianService.patchState({ sorting });
+    this.sampleBatchesService.patchState({ sorting });
   }
 
   // pagination
   paginate(paginator: PaginatorState) {
-    this.referringPhysicianService.patchState({ paginator });
+    this.sampleBatchesService.patchState({ paginator });
   }
 
-  
-  create() {
-    this.edit(undefined);
-  }
-
-  edit(id: number) {
-    const modalRef = this.modalService.open(EditReferringPhysicianModalComponent, { size: 'xl' });
-    modalRef.componentInstance.id = id;
+  process(batchesId: number) {
+    
+    const modalRef = this.modalService.open(SampleBatchesModalProcessComponent, { size: 'xl' });
+    modalRef.componentInstance.batched_number = batchesId;
     modalRef.result.then((result) =>
-    {
-      this.referringPhysicianService.fetch();
-      if (result.status === CrudOperation.SUCCESS) {
-        $.notify({
-          title: '<strong>Registro exitoso.</strong>',
-          message: 'Se ha registrado los datos del médico derivante exitosamente'
-        }, {
-          type: 'success'
-        }),
-      () => { }
-      }  
-    },
-      () => { }
-    );
+      {
+        this.sampleBatchesService.fetch();
+        if (result.status === CrudOperation.SUCCESS) {
+          $.notify({
+            title: '<strong>Registro exitoso.</strong>',
+            message: 'Se ha proceso correctamente el lote'
+          }, {
+            type: 'success'
+          }),
+        () => { }
+      }
+      }).catch((res) => {});
   }
-    delete(id: number) {
-      const modalRef = this.modalService.open(DeleteModalComponent);
-      modalRef.componentInstance.id = id;
-      modalRef.result.then(() => this.referringPhysicianService.fetch(), () => { });
-    }
+
 }

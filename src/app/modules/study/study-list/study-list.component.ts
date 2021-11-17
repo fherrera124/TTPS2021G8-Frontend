@@ -56,6 +56,9 @@ export class StudyListComponent
   public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
+  public filterState:string="Seleccione un estado";
+  public isSearchingByState = false;
+  public searchData:string="";
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -85,7 +88,9 @@ export class StudyListComponent
     this.filterGroup = this.fb.group({
       status: [''],
       type: [''],
-      searchTerm: [''],
+      searchTerm: ['']
+     
+
     });
     this.subscriptions.push(
       this.filterGroup.controls.status.valueChanges.subscribe(() =>
@@ -125,11 +130,24 @@ export class StudyListComponent
         debounceTime(150),
         distinctUntilChanged()
       )
-      .subscribe((val) => this.search(val));
+      .subscribe((val) => {
+        this.searchData = val;
+      this.search(val)});
     this.subscriptions.push(searchEvent);
+  }
+  filterStatus(){
+    if(this.filterState !== 'Seleccione un estado') {
+        this.search(this.filterState);
+        this.isSearchingByState = true
+    }   
+    else {
+      this.search('');
+      this.isSearchingByState = false;
+    }
   }
 
   search(searchTerm: string) {
+    searchTerm = searchTerm.toLowerCase();
     this.studyListService.patchState({ searchTerm });
   }
 
@@ -179,9 +197,9 @@ export class StudyListComponent
     modalRef.componentInstance.idStudy = idStudy;
     modalRef.result.then((result) =>
       {
-        this.studyListService.fetch();
         
         if (result.status === CrudOperation.SUCCESS) {
+          setTimeout(()=>{this.studyListService.fetch()}, 2000)
           $.notify({
             title: '<strong>Registro exitoso.</strong>',
             message: 'Se ha registrado correctamente el consentimiento firmado'
@@ -305,4 +323,12 @@ export class StudyListComponent
         () => { }
       ).catch((res) => {});
   }
+
+  downloadBudget(idStudy: number) {
+      this.studyService.downloadBudget(idStudy).subscribe(blobConsent => {
+      const fileURL = URL.createObjectURL(blobConsent);
+      window.open(fileURL, '_blank');
+      });
+  }
+
 }

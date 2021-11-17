@@ -24,6 +24,10 @@ export class StudyService extends TableService<Study> implements OnDestroy {
     return this.http.get(this.API_URL+'/'+studyId+'/download-consent',{responseType: 'blob'});
   }
   
+  downloadBudget(studyId: number): Observable<any> {
+    return this.http.get(this.API_URL+'/'+studyId+'/download-budget',{responseType: 'blob'});
+  }
+
   uploadConsent(formData: FormData, studyId: number): Observable<any> {
     return this.http.post(this.API_URL+'/'+studyId+'/signed-consent', formData, {
       reportProgress: true,
