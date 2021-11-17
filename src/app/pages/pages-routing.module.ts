@@ -33,7 +33,7 @@ const routes: Routes = [
             (m) => m.EmployeeModule
           ),
       },
-
+      
       {
         path: 'studies',
         loadChildren: () =>

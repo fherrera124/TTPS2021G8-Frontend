@@ -24,6 +24,7 @@ export class EditReferringPhysicianModalComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   validationErrors: ValidationErrors = new ValidationErrors();
   private subscriptions: Subscription[] = [];
+  public error: string;
   constructor(
     private fb: FormBuilder,
     public modal: NgbActiveModal,
@@ -32,7 +33,15 @@ export class EditReferringPhysicianModalComponent implements OnInit, OnDestroy {
   ) {}
   
   ngOnInit(): void {
+    this.error = undefined;
     this.isLoading$ = this.referringPhysicianService.isLoading$;
+    this.referringPhysicianService.errorMessage$.subscribe( httpError => {
+      if (httpError !==''){
+        this.error = httpError
+      }
+    }
+      );
+  
     this.loadReferringPhysician();
   }
 
@@ -109,32 +118,30 @@ export class EditReferringPhysicianModalComponent implements OnInit, OnDestroy {
   edit() {
     const sbUpdate = this.referringPhysicianService
       .update(this.referringPhysician)
-      .pipe(
-        tap(() => {
-          this.modal.close({status:CrudOperation.SUCCESS})
-        }),
-        catchError((errorMessage) => {
-          this.modal.dismiss(errorMessage);
-          return of(this.referringPhysician);
-        })
-      )
-      .subscribe((res) => (this.referringPhysician = res));
+      .subscribe((res: ReferringPhysician) => 
+      {
+        console.log(res);
+        if (res.id) {
+          this.referringPhysician = res
+          this.modal.close();
+        }  
+      }
+    );
     this.subscriptions.push(sbUpdate);
   }
 
   create() {
+    this.error = undefined;
     const sbCreate = this.referringPhysicianService
       .create(this.referringPhysician)
-      .pipe(
-        tap(() => {
-          this.modal.close({status:CrudOperation.SUCCESS})
-        }),
-        catchError((errorMessage) => {
-          this.modal.dismiss(errorMessage);
-          return of(this.referringPhysician);
-        })
-      )
-      .subscribe((res: ReferringPhysician) => (this.referringPhysician = res));
+      .subscribe((res: ReferringPhysician) => 
+      {
+        if (res.id) {
+          this.referringPhysician = res
+          this.modal.close();
+        }  
+      }
+    );
     this.subscriptions.push(sbCreate);
   }
   

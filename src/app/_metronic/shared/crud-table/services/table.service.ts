@@ -1,6 +1,6 @@
 // tslint:disable:variable-name
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, finalize, map, tap } from 'rxjs/operators';
 import { PaginatorState } from '../models/paginator.model';
 import { ITableState, TableResponseModel } from '../models/table.model';
@@ -25,7 +25,7 @@ export abstract class TableService<T> {
   private _isLoading$ = new BehaviorSubject<boolean>(false);
   private _isFirstLoading$ = new BehaviorSubject<boolean>(true);
   private _tableState$ = new BehaviorSubject<ITableState>(DEFAULT_STATE);
-  private _errorMessage = new BehaviorSubject<string>('');
+  private _errorMessage = new Subject<string>();
   private _subscriptions: Subscription[] = [];
 
   // Getters
@@ -75,7 +75,7 @@ export abstract class TableService<T> {
     this._errorMessage.next('');
     return this.http.post<BaseModel>(this.API_URL, item).pipe(
       catchError(err => {
-        this._errorMessage.next(err);
+        this._errorMessage.next(err.error.detail);
         console.error('CREATE ITEM', err);
         return of({ id: undefined });
       }),
@@ -117,9 +117,9 @@ export abstract class TableService<T> {
     this._errorMessage.next('');
     return this.http.put(url, item).pipe(
       catchError(err => {
-        this._errorMessage.next(err);
+        this._errorMessage.next(err.error.detail);
         console.error('UPDATE ITEM', item, err);
-        return of(item);
+        return of({ id: undefined });
       }),
       finalize(() => this._isLoading$.next(false))
     );

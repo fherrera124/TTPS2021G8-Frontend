@@ -12,13 +12,14 @@ import { ReferringPhysicianRoutingModule } from './referring-physician-routing.m
 import { ReferringPhysicianListComponent } from './referring-physician-list/referring-physician-list.component';
 import { ReferringPhysicianComponent } from './referring-physician.component';
 import { EditReferringPhysicianModalComponent } from './referring-physician-list/components/edit-referring-physician-modal/edit-referring-physician-modal.component';
-
+import { DeleteModalComponent } from './referring-physician-list/components/delete-referring-physician-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
     ReferringPhysicianComponent,
     ReferringPhysicianListComponent,
-    EditReferringPhysicianModalComponent
+    EditReferringPhysicianModalComponent,
+    DeleteModalComponent
   ],
   imports: [
     CommonModule,
@@ -30,11 +31,13 @@ import { EditReferringPhysicianModalComponent } from './referring-physician-list
     NgbModalModule,
     NgbDatepickerModule,
     SharedModule,
-    MatDatepickerModule,
+    MatDatepickerModule
+   
   ],
   entryComponents: [
     ReferringPhysicianListComponent,
-    EditReferringPhysicianModalComponent
+    EditReferringPhysicianModalComponent,
+    DeleteModalComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
