@@ -71,6 +71,20 @@ export const DynamicAsideMenuConfig = {
             },
           ]
      },
+     {
+      title: 'Médico derivante',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/General/User.svg',
+      page: '/studies',
+      submenu: [
+        {
+          title: 'Lista de médicos derivantes',
+          page: '/referring-physician/referring-physician'
+        },
+      ]
+ },
     {
       title: 'Tipo de estudios',
       root: true,

@@ -66,6 +66,49 @@
               <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
                 (click)="edit(study.id)">
                 <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+            </th>
+            <th>
+                Diagnóstico presuntivo
+                <app-sort-icon column="presumptive_diagnosis" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>
+                Presupuesto
+                <app-sort-icon column="budget" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"></app-sort-icon>
+            </th>
+            <th>Acciones</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let study of studyListService.items$ | async">
+              <td>{{ study.type_study.name }}</td>
+              <td>{{ study.current_state}}</td>
+              <td>{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
+              <td>{{ study.referring_physician.first_name }} {{ study.referring_physician.last_name }} </td>
+              <td>{{ study.presumptive_diagnosis.name }}</td>
+              <td>{{ study.budget }}</td>
+              <td style="display: flex;">
+                <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="detail(study)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>
+                </a>
+                <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="edit(study.id)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>
+                </a>
+                <a *ngIf="study.current_state === studyState.STATE_ONE" title="Subir comprobante de pago" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                (click)="uploadPaymentReceipt(study.id)">
+                <span [inlineSVG]="'./assets/media/svg/icons/Files/Upload.svg'" title="Subir comprobante de pago" cacheSVG="true"
+                  class="svg-icon svg-icon-md svg-icon-primary">
+                  </span>
+                </a>
+                <a *ngIf="study.current_state === studyState.STATE_THREE" title="Subir consentimiento firmado" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="uploadConsent(study.id)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true"title="Subir consentimiento firmado"
                   class="svg-icon svg-icon-md svg-icon-primary">
                 </span>
               </a>

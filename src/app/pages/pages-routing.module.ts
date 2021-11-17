@@ -41,13 +41,20 @@ const routes: Routes = [
             ),
 },
       {
+        path: 'referring-physician',
+        loadChildren: () =>
+          import('../modules/referring_physician/referring-physician.module').then(
+            (m) => m.ReferringPhysicianModule
+          ),
+      },
+      {
         path: 'type-studies',
         loadChildren: () =>
           import('../modules/type_study/type-study.module').then(
             (m) => m.TypeStudyModule
           ),
       },
-      {
+        {
         path: '',
         redirectTo: '/dashboard',
         pathMatch: 'full',
