@@ -34,7 +34,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/employees',
-      roles: ['CONFIGURATOR','ADMIN'],
+      roles: ['ADMIN'],
       submenu: [
         {
           title: 'Lista de Empleado',
@@ -94,7 +94,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-      roles: ['EMPLOYEE','ADMIN'],
+      roles: ['ADMIN'],
       submenu: [
         {
           title: 'Lista de médicos derivantes',
