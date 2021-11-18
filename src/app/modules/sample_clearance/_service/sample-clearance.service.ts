@@ -1,4 +1,3 @@
-import { SampleSelected } from './../../../../../.history/src/app/modules/sample_clearance/_model/sample-clearance.model_20211118143701';
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TableService } from '../../../_metronic/shared/crud-table';

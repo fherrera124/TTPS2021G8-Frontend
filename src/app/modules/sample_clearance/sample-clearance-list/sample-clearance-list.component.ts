@@ -19,7 +19,7 @@ import * as jQuery from 'jquery';
 import 'bootstrap-notify';
 import { CrudOperation } from '../../shared/utils/crud-operation.model';
 import { SampleClearanceConfirmModalComponent } from './components/sample-batches-process-modal/sample-clearance-confirm-modal';
-import { SampleClearance } from '.history/src/app/modules/sample_clearance/_model/sample-clearance.model_20211118143701';
+import { SampleClearance } from '../_model/sample-clearance.model';
 let $: any = jQuery;
 @Component({
   selector: 'app-sample-clearance-list',
