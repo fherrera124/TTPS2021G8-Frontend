@@ -183,7 +183,7 @@ export class StudyListComponent
         if (result.status === CrudOperation.SUCCESS) {
           $.notify({
             title: '<strong>Registro exitoso.</strong>',
-            message: 'Se ha registrado correctamente el estudio'
+            message: 'Se ha registrado correctamente el estudio. Se ha enviado un correo electrónico con el presupuesto del mismo'
           }, {
             type: 'success'
           }),

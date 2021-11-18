@@ -20,7 +20,7 @@ export class InterceptService implements HttpInterceptor {
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
 
-  constructor(private router: Router)
+  constructor(private router: Router, private authService: AuthService)
   {
 
   }
@@ -57,7 +57,8 @@ export class InterceptService implements HttpInterceptor {
         error => {
           if (error.status === 401 || error.status == 403) {
             localStorage.removeItem(this.authLocalStorageToken)
-            this.router.navigateByUrl('/authentication/login');
+            this.authService.currentUserSubject.next(undefined);
+            this.router.navigateByUrl('/auth/login');
             this.notShowError = true;
           }
           let errorWasShown = false;

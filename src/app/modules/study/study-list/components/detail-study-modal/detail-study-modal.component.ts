@@ -25,6 +25,14 @@ const EMPTY_STUDY = Study.getEmpty();
 })
 export class DetailStudyModalComponent {
   @Input() study: StudyList;
-  constructor(public modal: NgbActiveModal ) {}
+  constructor(public modal: NgbActiveModal, private studyService: StudyService ) {}
+  
+  downloadBudget(idStudy: number) {
+    this.studyService.downloadBudget(idStudy).subscribe(blobConsent => {
+    const fileURL = URL.createObjectURL(blobConsent);
+    window.open(fileURL, '_blank');
+    });
+}
+
     
 }

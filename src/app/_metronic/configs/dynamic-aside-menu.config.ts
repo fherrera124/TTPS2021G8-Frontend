@@ -55,6 +55,14 @@ export const DynamicAsideMenuConfig = {
           title: 'Lista de Estudios',
           page: '/studies/studies'
         },
+        {
+          title: 'Estudios Demorados',
+          page: '/studies/studies-delayed'
+        },
+        {
+          title: 'Estudios Cancelados',
+          page: '/studies/studies-canceled'
+        }
       ]
     },
     {

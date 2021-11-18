@@ -1,10 +1,7 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">Estudios</h3>
-    </div>
-    <div class="card-toolbar">
-      <button type="button" class="btn btn-primary" (click)="create()">Crear estudio</button>
+      <h3 class="card-label">Estudios Demorados</h3>
     </div>
   </div>
   <div class="card-body">
@@ -42,14 +39,13 @@
     <div class="table-responsive angular-bootstrap-table">
       <table class="table table-head-custom table-vertical-center overflow-hidden">
         <thead>
-          <th>           </th>
           <th>
-            Estudio
+            Tipo de estudio
             <app-sort-icon column="type_study" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-            Estado
+            Estado actual
             <app-sort-icon column="current_state" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
@@ -59,12 +55,12 @@
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-            Médico
+            Médico derivante
             <app-sort-icon column="referring_physician" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-              Diagnóstico
+              Diagnóstico presuntivo
               <app-sort-icon column="presumptive_diagnosis" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
                 (sort)="sort($event)"></app-sort-icon>
           </th>
@@ -73,24 +69,10 @@
               <app-sort-icon column="budget" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
                 (sort)="sort($event)"></app-sort-icon>
           </th>
-          <th>Acciones                </th>
+          <th>Acciones</th>
         </thead>
         <tbody>
-            <tr *ngFor="let study of studyListService.items$ | async">
-               <td style="display: flex;">
-                  <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                    (click)="detail(study)">
-                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md svg-icon-primary">
-                    </span>
-                  </a>
-                  <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                    (click)="edit(study.id)">
-                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md svg-icon-primary">
-                    </span>
-                  </a>
-              </td>
+            <tr *ngFor="let study of studyDelayedListService.items$ | async">
               <td>{{ study.type_study.name }}</td>
               <td>{{ study.current_state}}</td>
               <td>{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
@@ -98,51 +80,12 @@
               <td>{{ study.presumptive_diagnosis.name }}</td>
               <td>{{ study.budget }}</td>
               <td style="display: flex;">
-                <a *ngIf="study.current_state === studyState.STATE_ONE" title="Subir comprobante de pago"
-                (click)="uploadPaymentReceipt(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;" title="Subir comprobante de pago">
-                    Subir comprobante de pago
+                <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="detail(study)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
                   </span>
                 </a>
-               <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                (click)="uploadConsent(study.id)">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true"title="Subir consentimiento firmado"
-                class="svg-icon svg-icon-md svg-icon-primary">
-                </span>
-              </a>
-              <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                (click)="showShiftReservation(study.id)">
-                <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Esperando selecciónde turno"
-                class="svg-icon svg-icon-md svg-icon-primary">
-                </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_FOUR && userRol==='EMPLOYEE'" title="Tomar muestra" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-              (click)="registerSample(study.id)">
-              <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Tomar muestra"
-              class="svg-icon svg-icon-md svg-icon-primary">
-              </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_FIVE && userRol==='EMPLOYEE'" title="Retirar muestra" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                 (click)="registerSamplePickup(study.id)">
-              <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Retirar muestra"
-                    class="svg-icon svg-icon-md svg-icon-primary">
-              </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_EIGHT && userRol==='REPORTING_PHYSICIAN' "  title="Esperando interpretación de resultados e informes" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-                 (click)="registerReport(study.id)">
-              <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Esperando interpretación de resultados e informes"
-                    class="svg-icon svg-icon-md svg-icon-primary">
-              </span>
-              </a>
-              <a *ngIf="study.current_state === studyState.STATE_NINE && userRol==='EMPLOYEE'" title="Envíar reporte" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-              (click)="confirmSendReport(study.id)">
-              <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Envíar reporte"
-              class="svg-icon svg-icon-md svg-icon-primary">
-               </span>
-              </a>
             </td>
           </tr>
         </tbody>

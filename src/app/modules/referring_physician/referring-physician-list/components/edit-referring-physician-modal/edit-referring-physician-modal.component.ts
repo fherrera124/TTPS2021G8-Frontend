@@ -120,7 +120,6 @@ export class EditReferringPhysicianModalComponent implements OnInit, OnDestroy {
       .update(this.referringPhysician)
       .subscribe((res: ReferringPhysician) => 
       {
-        console.log(res);
         if (res.id) {
           this.referringPhysician = res
           this.modal.close();

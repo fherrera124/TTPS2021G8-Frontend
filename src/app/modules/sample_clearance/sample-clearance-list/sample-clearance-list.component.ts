@@ -1,6 +1,6 @@
 import { SampleClearanceService } from '../_service/sample-clearance.service';
 // tslint:disable:no-string-literal
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
@@ -19,14 +19,16 @@ import * as jQuery from 'jquery';
 import 'bootstrap-notify';
 import { CrudOperation } from '../../shared/utils/crud-operation.model';
 import { SampleClearanceConfirmModalComponent } from './components/sample-batches-process-modal/sample-clearance-confirm-modal';
+import { SampleClearance } from '.history/src/app/modules/sample_clearance/_model/sample-clearance.model_20211118143701';
 let $: any = jQuery;
 @Component({
   selector: 'app-sample-clearance-list',
   templateUrl: './sample-clearance-list.component.html',
 })
-export class SampleClearanceListComponent
+export class SampleClearanceListComponent  
   implements
   OnInit,
+  AfterViewInit,
   OnDestroy,
   ISortView,
   IFilterView,
@@ -41,17 +43,24 @@ export class SampleClearanceListComponent
   searchGroup: FormGroup;
   public selectedIds:number[] = [];
   private subscriptions: Subscription[] = [];
+  public samplesClearance:SampleClearance[];
   //public sampleBatchesState: typeof SampleBatchesState = SampleBatchesState;
   constructor(
     private fb: FormBuilder,
     public sampleClearanceService: SampleClearanceService,
     private modalService: NgbModal,
   ) { }
+  ngAfterViewInit(): void {
+    this.sampleClearanceService.items$.subscribe(
+      clearance => this.samplesClearance = clearance
+    );
+  }
 
   ngOnInit(): void {
     this.filterForm();
     this.searchForm();
     this.sampleClearanceService.fetch();
+    
     this.grouping = this.sampleClearanceService.grouping;
     this.paginator = this.sampleClearanceService.paginator;
     this.sorting = this.sampleClearanceService.sorting;
@@ -158,6 +167,5 @@ export class SampleClearanceListComponent
     } else {
       this.selectedIds = this.selectedIds.filter(idItem => idItem !== id);
     }
-    console.log(this.selectedIds);
   }
 }

@@ -5,7 +5,8 @@ import * as jQuery from 'jquery';
 import 'bootstrap-notify';
 import 'material-icons/iconfont/material-icons.css';
 import { CrudOperation } from 'src/app/modules/shared/utils/crud-operation.model';
-import { SampleBatchesService } from '../../../_service';
+import { SampleBatchesService } from 'src/app/modules/sample_batches/_service';
+
 
 let $: any = jQuery;
 @Component({

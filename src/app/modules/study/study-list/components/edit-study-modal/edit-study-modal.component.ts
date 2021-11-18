@@ -51,21 +51,18 @@ export class EditStudyModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading$ = this.studyService.isLoading$;
     this.loadStudy();
-    this.patientService.fetch();
-    this.typeStudyService.fetch();
-    this.referringPhysicianService.fetch();
-    this.diagnosisService.fetch();
-    this.diagnosisService.items$.subscribe(diagnosis => 
-      this.itemsDiagnosis = diagnosis.map(diagnosisItem => { return  {name: diagnosisItem.name ,value: diagnosisItem };})
+   
+    this.diagnosisService.getAll().subscribe(diagnosis => {
+            this.itemsDiagnosis = diagnosis.map(diagnosisItem => { return  {name: diagnosisItem.name ,value: diagnosisItem };})}
     )
 
-    this.referringPhysicianService.items$.subscribe(referringPhysicians => 
+    this.referringPhysicianService.getAll().subscribe(referringPhysicians => 
       this.itemsReferringPhysician = referringPhysicians.map(referringPhysicianItem => { return  {name: referringPhysicianItem.first_name +', ' + referringPhysicianItem.last_name,value: referringPhysicianItem };})
     )
-    this.typeStudyService.items$.subscribe(typeStudies => 
+    this.typeStudyService.getAll().subscribe(typeStudies => 
       this.itemsTypeStudy = typeStudies.map(typeStudyItem => { return  {name: typeStudyItem.name, value: typeStudyItem};})
       )
-    this.patientService.items$.subscribe(patients => 
+    this.patientService.getAll().subscribe(patients => 
       this.itemsPatients = patients.map(patientItem => { return  {name: patientItem.first_name +', ' + patientItem.last_name, value: patientItem };})
       )
   }
@@ -171,8 +168,10 @@ export class EditStudyModalComponent implements OnInit, OnDestroy {
     this.subscriptions.push(sbCreate);
   }
   getSelectedItem(items: Items<string, any>[], id: number){
+    if (items)
       return items.find(it=> it.value.id == id);
   }
+  
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }
