@@ -1,15 +1,5 @@
 export const DynamicAsideMenuConfig = {
   items: [
-    {
-      title: 'Home',
-      root: true,
-      icon: 'flaticon2-architecture-and-city',
-      svg: './assets/media/svg/icons/Design/Layers.svg',
-      page: '/dashboard',
-      roles: ['ANONYMOUS'],
-      translate: 'MENU.DASHBOARD',
-      bullet: 'dot',
-    },
     { section: 'Applications', roles: ['ANONYMOUS'] },
     {
       title: 'Pacientes',

@@ -78,16 +78,16 @@
         <tbody>
             <tr *ngFor="let study of studyListService.items$ | async">
                <td style="display: flex;">
-                  <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  <a title="Detalle" class="btn btn-icon btn-light  btn-sm mx-3"
                     (click)="detail(study)">
-                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md svg-icon-primary">
+                    <span [inlineSVG]="'./assets/plugins/keenthemes-icons/svg/056-bold-sort.svg'" cacheSVG="true"
+                      class="svg-icon svg-icon-md ">
                     </span>
                   </a>
-                  <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  <a title="Editar" class="btn btn-icon btn-light  btn-sm mx-3"
                     (click)="edit(study.id)">
                     <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md svg-icon-primary">
+                      class="svg-icon svg-icon-md">
                     </span>
                   </a>
               </td>
@@ -100,50 +100,47 @@
               <td style="display: flex;">
                 <a *ngIf="study.current_state === studyState.STATE_ONE" title="Subir comprobante de pago"
                 (click)="uploadPaymentReceipt(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;" title="Subir comprobante de pago">
+                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir comprobante de pago">
                     Subir comprobante de pago
                   </span>
                 </a>
-               <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+               <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado"
                 (click)="uploadConsent(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;" title="Subir consentimiento firmado">
+                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
                   Subir consentimiento firmado
                 </span>
               </a>
-              <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno"
                 (click)="showShiftReservation(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;" title="Esperando selección de turno">
+                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando selección de turno">
                   Esperando selección de turno
                 </span>
               </a>
 
-              <a *ngIf="study.current_state === studyState.STATE_FOUR && userRol==='EMPLOYEE'" title="Esperando toma de muestra" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              <a *ngIf="study.current_state === studyState.STATE_FOUR && userRol==='EMPLOYEE'" title="Esperando toma de muestra" 
               (click)="registerSample(study.id)">
-              <span class="badge bg-dark" style="color: blanchedalmond;" title="Esperando toma de muestra">
+              <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando toma de muestra">
                 Esperando toma de muestra
               </span>
               </a>
 
-              <a *ngIf="study.current_state === studyState.STATE_FIVE && userRol==='EMPLOYEE'" title="Esperando retiro muestra" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              <a *ngIf="study.current_state === studyState.STATE_FIVE && userRol==='EMPLOYEE'" title="Esperando retiro muestra" 
                  (click)="registerSamplePickup(study.id)">
-                 <span class="badge bg-dark" style="color: blanchedalmond;" title="Esperando retiro muestra">
+                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando retiro muestra">
                   Esperando retiro muestra
                 </span>
               </a>
 
-              <a *ngIf="study.current_state === studyState.STATE_EIGHT && userRol==='REPORTING_PHYSICIAN' "  title="Esperando interpretación de resultados e informes" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              <a *ngIf="study.current_state === studyState.STATE_EIGHT && userRol==='REPORTING_PHYSICIAN' "  title="Esperando interpretación de resultados e informes"
                  (click)="registerReport(study.id)">
-                 <span class="badge bg-dark" style="color: blanchedalmond;" title="Esperando interpretación de resultados e informes">
+                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando interpretación de resultados e informes">
                   Esperando interpretación de resultados e informes
                 </span>
               </a>
               
-              <a *ngIf="study.current_state === studyState.STATE_NINE && userRol==='EMPLOYEE'" title="Envíar reporte" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+              <a *ngIf="study.current_state === studyState.STATE_NINE && userRol==='EMPLOYEE'" title="Envíar reporte"
               (click)="confirmSendReport(study.id)">
-              <span [inlineSVG]="'./assets/media/svg/icons/Files/DownloadedFile.svg'" cacheSVG="true" title="Envíar reporte"
-              class="svg-icon svg-icon-md svg-icon-primary">
-               </span>
-               <span class="badge bg-dark" style="color: blanchedalmond;" title="Envíar reporte">
+               <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer;"  title="Envíar reporte">
                 Envíar reporte
               </span>
 
