@@ -126,18 +126,3 @@ export class StudyDelayedListService extends TableService<StudyList> implements 
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 }
-
-@Injectable({
-  providedIn: 'root'
-})
-
-export class StudyCanceledListService extends TableService<StudyList> implements OnDestroy {
-  API_URL = `${environment.apiUrl}/studies/delayed`;
-  constructor(@Inject(HttpClient) http) {
-    super(http);
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
-  }
-}

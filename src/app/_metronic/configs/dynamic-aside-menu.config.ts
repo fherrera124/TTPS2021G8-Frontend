@@ -48,10 +48,6 @@ export const DynamicAsideMenuConfig = {
         {
           title: 'Estudios Demorados',
           page: '/studies/studies-delayed'
-        },
-        {
-          title: 'Estudios Cancelados',
-          page: '/studies/studies-canceled'
         }
       ]
     },
