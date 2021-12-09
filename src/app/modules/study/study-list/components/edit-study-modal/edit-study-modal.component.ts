@@ -168,15 +168,10 @@ export class EditStudyModalComponent implements OnInit, OnDestroy {
     this.subscriptions.push(sbCreate);
   }
   getSelectedItem(items: Items<string, any>[], id: number){
-<<<<<<< HEAD
-      return items.find(it=> it.value.id == id);
-  }
-=======
     if (items)
       return items.find(it=> it.value.id == id);
   }
   
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }

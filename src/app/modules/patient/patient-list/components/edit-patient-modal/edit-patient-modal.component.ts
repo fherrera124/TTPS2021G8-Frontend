@@ -172,14 +172,11 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
       .subscribe((res: Patient) => (this.patient = res));
     this.subscriptions.push(sbCreate);
   }
-<<<<<<< HEAD
-=======
   
   getSelectedItem(items: Items<string, any>[], id: number){
     if (items)
       return items.find(it=> it.value.id == id);
   }
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
