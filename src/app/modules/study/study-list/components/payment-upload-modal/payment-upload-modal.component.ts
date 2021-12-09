@@ -55,5 +55,13 @@ let $: any = jQuery;
         });
         this.modal.close({status:CrudOperation.SUCCESS})
     }
+    
+    close() {
+      if (this.isUploaded){
+        this.modal.close({status:CrudOperation.SUCCESS})
+      } else {
+        this.modal.close({status:CrudOperation.ERROR})
+      }
+    }
   }
     

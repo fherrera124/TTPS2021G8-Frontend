@@ -34,7 +34,7 @@
      <div class="modal-footer">
       <button class="btn btn-light btn-elevate mr-2" *ngIf="!isUploaded" (click)="upload()" type="button" ><i class="fas fa-file-import"></i> Registrar pago
       </button>
-      <button type="button"class="btn btn-light btn-elevate mr-2"  (click)="modal.dismiss()" >
+      <button type="button"class="btn btn-light btn-elevate mr-2"  (click)="close()" >
         <span *ngIf="!isUploaded">Cancelar</span>
         <span *ngIf="isUploaded">Cerrar</span>
       </button>
