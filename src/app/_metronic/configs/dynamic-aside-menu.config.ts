@@ -1,18 +1,5 @@
 export const DynamicAsideMenuConfig = {
   items: [
-<<<<<<< HEAD
-    {
-      title: 'Home',
-      root: true,
-      icon: 'flaticon2-architecture-and-city',
-      svg: './assets/media/svg/icons/Design/Layers.svg',
-      page: '/dashboard',
-      roles: ['ANONYMOUS'],
-      translate: 'MENU.DASHBOARD',
-      bullet: 'dot',
-    },
-=======
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
     { section: 'Applications', roles: ['ANONYMOUS'] },
     {
       title: 'Pacientes',
@@ -58,13 +45,10 @@ export const DynamicAsideMenuConfig = {
           title: 'Lista de Estudios',
           page: '/studies/studies'
         },
-<<<<<<< HEAD
-=======
         {
           title: 'Estudios Demorados',
           page: '/studies/studies-delayed'
         }
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
       ]
     },
     {
@@ -74,11 +58,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-user-outline-symbol',
       svg: './assets/media/svg/icons/General/User.svg',
       page: '/studies',
-<<<<<<< HEAD
-      roles: ['EMPLOYEE','ADMIN'],
-=======
       roles: ['EMPLOYEE'],
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
       submenu: [
         {
           title: 'Lista de Lotes',
@@ -127,11 +107,7 @@ export const DynamicAsideMenuConfig = {
       roles: ['ADMIN'],
       submenu: [
         {
-<<<<<<< HEAD
-          title: 'Lista de médicos derivantes',
-=======
           title: 'Lista de médicos informantes',
->>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
           page: '/referring-physician/referring-physician'
         },
       ]
