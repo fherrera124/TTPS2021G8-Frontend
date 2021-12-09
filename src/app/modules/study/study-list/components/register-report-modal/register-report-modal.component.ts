@@ -26,9 +26,7 @@ export class RegisterReportModalComponent  {
   
     
   save() {
-    /*console.log(this.result);
-    console.log(this.editorContent);
-    console.log((this.result && this.editorContent));*/
+ 
     this.studyService.registerReport(this.idStudy,this.result,this.editorContent).subscribe(
       rpta => this.modal.close({status:CrudOperation.SUCCESS})
     )

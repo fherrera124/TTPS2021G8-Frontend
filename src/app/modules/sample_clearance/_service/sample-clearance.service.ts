@@ -1,5 +1,5 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TableService } from '../../../_metronic/shared/crud-table';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -14,8 +14,9 @@ export class SampleClearanceService extends TableService<SampleClearance> implem
     super(http);
   }
   
-  registerSampleClearanceAsPay(samplesId: number[]): Observable<any> {
-        return this.http.post(this.API_URL+'/mark-as-processed', samplesId);
+  registerSampleClearanceAsPay(list_int: number[]): Observable<any> {
+ 
+    return this.http.post(this.API_URL+'/mark-as-processed', list_int);
   }
   
   ngOnDestroy() {

@@ -9,6 +9,7 @@ export class Patient implements BaseModel {
   email: string;
   dni: string;
   birth_date: any;
+  health_insurance_id: number;
   health_insurance_number: number;
   clinical_history: string;
   password: string;
@@ -25,9 +26,15 @@ export class Patient implements BaseModel {
     this.dni = formData.dni;
     this.birth_date = formData.birth_date.year + "-" + formData.birth_date.month + "-" + formData.birth_date.day;
     this.health_insurance_number = formData.health_insurance_number !== null && formData.health_insurance_number !== undefined && formData.health_insurance_number !== "" ? formData.health_insurance_number : 0;
+    this.health_insurance_id = formData.health_insurance_id !== null && formData.health_insurance_id !== undefined && formData.health_insurance_id !== "" ? formData.health_insurance_id : 0;
     this.clinical_history = formData.clinical_history !== null && formData.clinical_history !== undefined ? formData.clinical_history : "";
     this.password = "asd";
 
     return this;
   }
+}
+
+export interface HealthInsurance {
+  id: number,
+  name: string
 }

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TableService } from '../../../_metronic/shared/crud-table';
@@ -15,5 +16,9 @@ export class ReferringPhysicianService extends TableService<ReferringPhysician> 
 
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
+
+  getAll(): Observable<ReferringPhysician[]> {
+    return this.http.get<ReferringPhysician[]>(this.API_URL)
   }
 }

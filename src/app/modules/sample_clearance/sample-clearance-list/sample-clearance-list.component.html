@@ -4,8 +4,11 @@
       <h3 class="card-label">Liquidación de extracciones</h3>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body"> 
     <!-- begin: Filtration form -->
+    <div *ngIf="samplesClearance && samplesClearance.length === 0" class="alert alert-warning" role="alert">
+      No existen muestras pendientes de Liquidación
+    </div>
     <div class="form form-label-right">
       <div class="form-group row">
         <form class="col-lg-6" [formGroup]="searchGroup">
@@ -53,7 +56,11 @@
           <th>Acciones</th>
         </thead>
         <tbody>
+<<<<<<< HEAD
           <tr *ngFor="let sampleClearance of sampleClearanceService.items$ | async">
+=======
+          <tr *ngFor="let sampleClearance of samplesClearance">
+>>>>>>> 3c367c1303791638e8b8d9832dc12117f0615a5a
             <td>{{ sampleClearance.sample_batch_id}}</td>
             <td>{{ sampleClearance.picked_up_date}}</td>
             <td>{{ sampleClearance.picked_up_by}}</td>

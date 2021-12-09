@@ -1,4 +1,3 @@
-import { AuthService } from 'src/app/modules/auth';
 import {  Component,  Input } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import * as jQuery from 'jquery';
