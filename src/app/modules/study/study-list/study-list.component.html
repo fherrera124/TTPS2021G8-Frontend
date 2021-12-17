@@ -16,8 +16,6 @@
             formControlName="searchTerm" /><small *ngIf="!isSearchingByState" class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
         </form>
         <br>
-      </div>
-      <div class="row">
         <div class="col-lg-6" >
           <select (change)="filterStatus()" *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" [disabled]="searchData !==''" [(ngModel)]="filterState" class="form-control form-control-lg"  name="filterState"> 
             <option value="Seleccione un estado" selected>Seleccione un estado</option>
@@ -85,8 +83,8 @@
               <td style="display: flex;">
                 <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
                   (click)="detail(study)">
-                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                    class="svg-icon svg-icon-md svg-icon-primary">
+                  <span [inlineSVG]="'./assets/media/svg/icons/General/Binocular.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary" title="Detalle">
                   </span>
                 </a>
                 <a title="Editar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
@@ -97,7 +95,7 @@
                 </a>
                 <a title="Descargar presupuesto" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
                 (click)="downloadBudget(study.id)">
-                <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                <span [inlineSVG]="'./assets/media/svg/icons/Files/Download.svg'" cacheSVG="true"
                   class="svg-icon svg-icon-md svg-icon-primary">
                 </span>
                 </a>
