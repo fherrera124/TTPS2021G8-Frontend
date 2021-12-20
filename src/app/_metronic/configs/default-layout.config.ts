@@ -207,7 +207,7 @@ export const DefaultLayoutConfig =
       "display": false
     },
     "quickPanel": {
-      "display": true,
+      "display": false,
       "offcanvas": {
         "direction": "right"
       }

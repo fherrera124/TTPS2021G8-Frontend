@@ -1,6 +1,16 @@
 export const DynamicAsideMenuConfig = {
   items: [
-    { section: 'Applications', roles: ['ANONYMOUS'] },
+    {
+      title: 'Home',
+      root: true,
+      icon: 'flaticon2-architecture-and-city',
+      svg: './assets/media/svg/icons/Home/Home.svg',
+      page: '/dashboard',
+      roles: ['ANONYMOUS'],
+      translate: 'MENU.DASHBOARD',
+      bullet: 'dot',
+    },
+    { section: 'Menu', roles: ['ANONYMOUS'] },
     {
       title: 'Pacientes',
       root: true,
@@ -37,7 +47,7 @@ export const DynamicAsideMenuConfig = {
       root: true,
       bullet: 'dot',
       icon: 'flaticon2-user-outline-symbol',
-      svg: './assets/media/svg/icons/General/User.svg',
+      svg: './assets/media/svg/icons/Files/File.svg',
       page: '/studies',
       roles: ['EMPLOYEE','REPORTING_PHYSICIAN'],
       submenu: [
@@ -56,7 +66,7 @@ export const DynamicAsideMenuConfig = {
       root: true,
       bullet: 'dot',
       icon: 'flaticon2-user-outline-symbol',
-      svg: './assets/media/svg/icons/General/User.svg',
+      svg: './assets/media/svg/icons/Home/Box.svg',
       page: '/studies',
       roles: ['EMPLOYEE'],
       submenu: [
@@ -71,7 +81,7 @@ export const DynamicAsideMenuConfig = {
           root: true,
           bullet: 'dot',
           icon: 'flaticon2-user-outline-symbol',
-          svg: './assets/media/svg/icons/General/User.svg',
+          svg: './assets/media/svg/icons/Food/Bottle1.svg',
           page: '/studies',
           roles: ['EMPLOYEE'],
           submenu: [
@@ -86,7 +96,7 @@ export const DynamicAsideMenuConfig = {
       root: true,
       bullet: 'dot',
       icon: 'flaticon2-user-outline-symbol',
-      svg: './assets/media/svg/icons/General/User.svg',
+      svg: './assets/media/svg/icons/General/Heart.svg',
       page: '/studies',
       roles: ['EMPLOYEE'],
       submenu: [
