@@ -62,6 +62,21 @@ export const DynamicAsideMenuConfig = {
       ]
     },
     {
+      title: 'Mis Estudios',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/Files/File.svg',
+      page: '/studies',
+      roles: ['PATIENT'],
+      submenu: [
+        {
+          title: 'Lista de mis estudios',
+          page: '/studies/studies'
+        }
+      ]
+    },
+    {
       title: 'Lotes',
       root: true,
       bullet: 'dot',

@@ -13,6 +13,9 @@ export class Patient implements BaseModel {
   health_insurance_number: number;
   clinical_history: string;
   password: string;
+  first_name_tutor: string;
+  last_name_tutor: string;
+ 
 
   public static getEmpty():Patient {
     return new Patient();

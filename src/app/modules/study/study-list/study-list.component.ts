@@ -31,6 +31,7 @@ import { RegisterReportModalComponent } from './components/register-report-modal
 import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { ConfirmSendReportModalComponent } from './components/confirm-send-report-modal/confirm-send-rerport-modal';
 import { DetailStudyModalComponent } from './components/detail-study-modal/detail-study-modal.component';
+import { ConfiguratorService } from '../../shared/service/configurator.service';
 let $: any = jQuery;
 @Component({
   selector: 'app-study-list',
@@ -56,19 +57,22 @@ export class StudyListComponent
   public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
-  public filterState:string="Seleccione un estado";
+  public filterState = 'Seleccione un estado';
   public isSearchingByState = false;
-  public searchData:string="";
+  public searchData = '';
+  public obligatedMode: boolean;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
     public studyListService: StudyListService,
     public studyService: StudyService,
-    public authService: AuthService
+    public authService: AuthService,
+    public configuratorService: ConfiguratorService
   ) { }
 
   ngOnInit(): void {
     this.userRol = this.authService.getAuthFromLocalStorage().role;
+    console.log(this.userRol);
     this.filterForm();
     this.searchForm();
     this.studyListService.fetch();
@@ -77,7 +81,11 @@ export class StudyListComponent
     this.sorting = this.studyListService.sorting;
     const sb = this.studyListService.isLoading$.subscribe(res => this.isLoading = res);
     this.subscriptions.push(sb);
-    
+    this.configuratorService.getConfigurator().subscribe(response => {
+      this.obligatedMode = response.obligated_mode;
+    console.log(this.obligatedMode);
+    }
+      )
   }
 
   ngOnDestroy() {
@@ -281,6 +289,7 @@ export class StudyListComponent
     const modalRef = this.modalService.open(DetailStudyModalComponent
       , { size: 'xl',keyboard: false});
     modalRef.componentInstance.study = study;
+    modalRef.componentInstance.userRol = this.userRol;
   }
 
   registerSamplePickup(idStudy: number) {
