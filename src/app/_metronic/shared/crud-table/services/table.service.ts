@@ -70,10 +70,11 @@ export abstract class TableService<T> {
 
   // CREATE
   // server should return the object with ID
-  create(item: BaseModel): Observable<BaseModel> {
+  create(item: BaseModel, URL: string = ''): Observable<BaseModel> {
+    let apiUrl = URL !== '' ? URL : this.API_URL
     this._isLoading$.next(true);
     this._errorMessage.next('');
-    return this.http.post<BaseModel>(this.API_URL, item).pipe(
+    return this.http.post<BaseModel>(apiUrl, item).pipe(
       catchError(err => {
         this._errorMessage.next(err.error.detail);
         console.error('CREATE ITEM', err);

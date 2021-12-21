@@ -1,0 +1,18 @@
+
+  
+  <div class="card-body">
+    <div class="row mb-4">
+      <button type="button" class="btn btn-info mr-2" (click)="changeType('bar')">Ver gráfico de barras</button>
+      <button type="button" class="btn btn-primary mr-2" (click)="changeType('line')">Ver gráfico de lineas</button>
+      <button type="button" class="btn btn-danger" (click)="changeType('radar')">Ver gráfico de radar</button>
+    </div>
+    <h4>Estudios por tipo</h4>
+    <canvas baseChart #typeChart
+    [datasets]="perTypeData"
+    [labels]="perTypeLabels"
+    [options]="perTypeOptions"
+    [plugins]="perTypePlugins"
+    [legend]="perTypeLegend"
+    [chartType]="perTypeChartType">
+  </canvas>
+  </div>

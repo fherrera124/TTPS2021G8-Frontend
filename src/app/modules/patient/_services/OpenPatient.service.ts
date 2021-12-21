@@ -21,10 +21,6 @@ export class PatientService extends TableService<Patient> implements OnDestroy {
   getAll(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.API_URL)
   }
-
-  createOpen(item: Patient): Observable<any> {
-    return super.create(item,this.API_URL + '/open');
-  }
 }
 
 @Injectable({

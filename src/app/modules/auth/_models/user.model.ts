@@ -9,6 +9,7 @@ export class UserModel extends AuthModel {
   email: string;
   pic: string;
   roles: number[];
+  force_password_change: boolean;
 
 
   setUser(user: any) {

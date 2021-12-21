@@ -104,10 +104,15 @@ export class AuthService implements OnDestroy {
     );
   }
 
-  forgotPassword(email: string): Observable<boolean> {
+  forgotPassword(pwd: string): Observable<boolean> {
+    const auth = this.getAuthFromLocalStorage();
+    if (!auth || !auth.access_token) {
+      return of(undefined);
+    }
+
     this.isLoadingSubject.next(true);
     return this.authHttpService
-      .forgotPassword(email)
+      .forgotPassword(pwd)
       .pipe(finalize(() => this.isLoadingSubject.next(false)));
   }
 

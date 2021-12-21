@@ -3,18 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardsModule } from '../../_metronic/partials/content/dashboards/dashboards.module';
-import { ChartsModule } from 'ng2-charts';
-import { MonthChartComponent } from './components/month-chart/month-chart.component';
-import { TypeChartComponent } from './components/type-chart/type-chart.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { StadisticModule } from 'src/app/modules/stadistic/stadistic.module';
 
 @NgModule({
-  declarations: [DashboardComponent,MonthChartComponent,TypeChartComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    ChartsModule,
     RouterModule.forChild([
       {
         path: '',
@@ -22,10 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
       },
     ]),
     DashboardsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatFormFieldModule
+    StadisticModule
   ],
 })
 export class DashboardModule {}

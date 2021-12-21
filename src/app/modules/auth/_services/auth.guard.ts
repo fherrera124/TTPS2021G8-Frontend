@@ -1,24 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import {
   Router,
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-} from '@angular/router';
-import { AuthService } from './auth.service';
+} from "@angular/router";
+import { AuthService } from "./auth.service";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
     if (currentUser) {
+      if (currentUser.force_password_change) {
+        this.router.navigateByUrl("auth/forgot-password");
+      }
       // logged in so return true
       return true;
     }
 
-    if (this.authService.getAuthFromLocalStorage() && this.authService.getAuthFromLocalStorage().access_token) {
+    if (
+      this.authService.getAuthFromLocalStorage() &&
+      this.authService.getAuthFromLocalStorage().access_token
+    ) {
       // logged in so return true
       return true;
     }

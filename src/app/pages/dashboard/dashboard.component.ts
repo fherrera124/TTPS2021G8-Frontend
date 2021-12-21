@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { BaseChartDirective, Label } from 'ng2-charts';
-import { StudyService } from 'src/app/modules/study/_services';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-dashboard',

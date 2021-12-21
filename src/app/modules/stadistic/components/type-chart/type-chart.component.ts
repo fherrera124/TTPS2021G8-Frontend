@@ -37,4 +37,8 @@ export class TypeChartComponent implements OnInit {
       })
   }
 
+  changeType(type: ChartType) {
+    this.perTypeChartType = type;
+  }
+
 }
