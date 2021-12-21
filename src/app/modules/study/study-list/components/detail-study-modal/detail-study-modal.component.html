@@ -54,11 +54,11 @@
             <span>{{study.appointment.date_appointment}}</span>          
           </div>
         </div>
-        <div *ngIf="study.sample.picked_up_date" class="form-group row">  
+        <div *ngIf="study.sample" class="form-group row">
           <div class="col-lg-2">
             <span><b>Fecha de extracción: </b></span>
             <br>
-            <span>{{study.sample.picked_up_date}}</span>          
+            <span>{{study.sample.picked_up_date}}</span>
           </div>
           <div class="col-lg-2">
             <span><b>Extraccionista: </b></span>
