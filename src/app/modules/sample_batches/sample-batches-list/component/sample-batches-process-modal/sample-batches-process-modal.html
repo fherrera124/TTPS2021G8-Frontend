@@ -18,6 +18,48 @@
             </div>
           </div>
     </ng-container>
+<div class="table-responsive angular-bootstrap-table">
+      <table class="table table-head-custom table-vertical-center overflow-hidden">
+        <thead>
+          <th>
+            Paciente
+          </th>
+          <th>
+            Estudio
+          </th>
+          <th>
+            Fecha <br> de toma de muestra
+          </th>
+          <th>
+            Extraccionista
+          </th>
+          <th>
+            Ml <br> extraídos
+          </th>
+          <th>
+            Nro <br> de freezer
+          </th>
+          <th>Muestra <br> Insuficiente</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sampleClearance of samples">
+            <td>{{ sampleClearance.study.patient.first_name +', ' + sampleClearance.study.patient.last_name}}</td>
+            <td>{{ sampleClearance.study.type_study.name}}</td>
+            <td>{{ sampleClearance.picked_up_date}}</td>
+            <td>{{ sampleClearance.picked_up_by}}</td>
+            <td>{{ sampleClearance.ml_extracted}}</td>
+            <td>{{ sampleClearance.freezer_number}}</td>
+            <td style="display: flex;">
+              <a title="Procesar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                <span  title="Procesar">
+                  <input type="checkbox" (change)="changeSelectedSample($event,sampleClearance.id)">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="modal-footer">
       <button
         type="button"

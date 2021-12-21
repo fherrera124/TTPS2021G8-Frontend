@@ -51,7 +51,7 @@
             <app-sort-icon column="current_state" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
-          <th>
+          <th *ngIf="userRol==='EMPLOYEE'">
             Paciente
             <app-sort-icon column="patient" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
@@ -82,7 +82,7 @@
                       class="svg-icon svg-icon-md ">
                     </span>
                   </a>
-                  <a title="Editar" class="btn btn-icon btn-light  btn-sm mx-3"
+                  <a *ngIf="userRol==='EMPLOYEE'" title="Editar" class="btn btn-icon btn-light  btn-sm mx-3"
                     (click)="edit(study.id)">
                     <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                       class="svg-icon svg-icon-md">
@@ -90,25 +90,25 @@
                   </a>
               </td>
               <td>{{ study.type_study.name }}</td>
-              <td>{{ study.current_state}}</td>
-              <td>{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
+              <td>{{ userRol==='EMPLOYEE' ? study.current_state: study.current_state_patient_view}}</td>
+              <td *ngIf="userRol==='EMPLOYEE'">{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
               <td>{{ study.referring_physician.first_name }} {{ study.referring_physician.last_name }} </td>
               <td>{{ study.presumptive_diagnosis.name }}</td>
               <td>{{ study.budget }}</td>
-              <td style="display: flex;">
-                <a *ngIf="study.current_state === studyState.STATE_ONE" title="Subir comprobante de pago"
+              <td>
+                <a *ngIf="(study.current_state === studyState.STATE_ONE && userRol==='PATIENT' && obligatedMode) || (study.current_state === studyState.STATE_ONE && userRol==='EMPLOYEE' && !obligatedMode)  " title="Subir comprobante de pago"
                 (click)="uploadPaymentReceipt(study.id)">
                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir comprobante de pago">
                     Subir comprobante de pago
                   </span>
                 </a>
-               <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado"
+               <a *ngIf="(study.current_state === studyState.STATE_TWO && userRol==='PATIENT' && obligatedMode) || (study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE' && !obligatedMode)" title="Subir consentimiento firmado"
                 (click)="uploadConsent(study.id)">
                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
                   Subir consentimiento firmado
                 </span>
               </a>
-              <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno"
+              <a *ngIf="(study.current_state === studyState.STATE_THREE && userRol==='PATIENT' && obligatedMode) || (study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE' && !obligatedMode)" title="Esperando selección de turno"
                 (click)="showShiftReservation(study.id)">
                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando selección de turno">
                   Esperando selección de turno

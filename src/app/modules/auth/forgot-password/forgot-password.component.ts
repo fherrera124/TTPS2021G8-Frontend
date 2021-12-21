@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Observable, Subscription } from "rxjs";
 import { AuthService } from "../_services/auth.service";
 import { first } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { EmployeeService } from "../../employee/_services";
 import { PatientService } from "../../patient/_services";
 
@@ -15,15 +15,18 @@ export class ForgotPasswordComponent implements OnInit {
   isLoading$;
   formGroup: FormGroup;
   password = "";
+  returnUrl: string;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private route: ActivatedRoute,
   ) {}
   ngOnInit(): void {
     this.loadForm();
+    this.returnUrl =this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
   loadForm() {
@@ -45,7 +48,7 @@ export class ForgotPasswordComponent implements OnInit {
       let userloged = this.authService.currentUserValue;
       let param = { id: userloged.id, force_password_change: false };
       this.patientService.update(param).subscribe((res) => {
-        this.router.navigateByUrl("/dashboard");
+        this.router.navigate([this.returnUrl]);
       });
     });
   }
