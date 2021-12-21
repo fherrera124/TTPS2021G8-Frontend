@@ -1,6 +1,6 @@
 import { AuthService } from 'src/app/modules/auth';
 // tslint:disable:no-string-literal
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -31,7 +31,11 @@ import { RegisterReportModalComponent } from './components/register-report-modal
 import { RegisterSampleModalComponent } from './components/register-sample-modal/register-sample-modal.component';
 import { ConfirmSendReportModalComponent } from './components/confirm-send-report-modal/confirm-send-rerport-modal';
 import { DetailStudyModalComponent } from './components/detail-study-modal/detail-study-modal.component';
+import { ConfirmCancelPaymentModalComponent } from './components/confirm-cancel-payment-modal/confirm-cancel-payment-modal';
+
+
 let $: any = jQuery;
+
 @Component({
   selector: 'app-study-list',
   templateUrl: './study-list.component.html',
@@ -53,19 +57,21 @@ export class StudyListComponent
   isLoading: boolean;
   filterGroup: FormGroup;
   searchGroup: FormGroup;
-  public userRol:string;
+  public userRol: string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
-  public filterState:string="Seleccione un estado";
+  public filterState = 'Seleccione un estado';
   public isSearchingByState = false;
-  public searchData:string="";
+  public searchData = '';
+ 
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
     public studyListService: StudyListService,
     public studyService: StudyService,
     public authService: AuthService
-  ) { }
+    
+  ) {}
 
   ngOnInit(): void {
     this.userRol = this.authService.getAuthFromLocalStorage().role;
@@ -77,7 +83,6 @@ export class StudyListComponent
     this.sorting = this.studyListService.sorting;
     const sb = this.studyListService.isLoading$.subscribe(res => this.isLoading = res);
     this.subscriptions.push(sb);
-    
   }
 
   ngOnDestroy() {
@@ -208,6 +213,26 @@ export class StudyListComponent
         () => { }
       }
       }).catch((res) => {});
+  }
+
+  cancelPaymentReceipt(idStudy: number) {
+    const modalRef = this.modalService.open(ConfirmCancelPaymentModalComponent
+      , { size: 'xs',keyboard: false});
+    modalRef.componentInstance.idStudy = idStudy;
+    modalRef.result.then((result) =>{
+        this.studyListService.fetch();
+        if (result.status === CrudOperation.SUCCESS) {
+          $.notify({
+            title: '<strong>Anulación exitosa.</strong>',
+            message: 'Se ha anulado exitosamente el pago'
+          }, {
+            type: 'success'
+          }),
+        () => { }
+      }
+    },
+        () => { }
+      ).catch((res) => {});
   }
 
   uploadPaymentReceipt(idStudy: number) {

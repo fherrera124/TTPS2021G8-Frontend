@@ -100,12 +100,17 @@
                 (click)="uploadPaymentReceipt(study.id)">
                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir comprobante de pago">
                     Subir comprobante de pago
-                  </span>
+                </span>
                 </a>
                <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado"
-                (click)="uploadConsent(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
+               >
+                <span  (click)="uploadConsent(study.id)" class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
                   Subir consentimiento firmado
+                </span>
+                <br>
+                <br>
+                <span  (click)="cancelPaymentReceipt(study.id)" class="badge bg-danger" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
+                  Cancelar comprobante de pago
                 </span>
               </a>
               <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno"

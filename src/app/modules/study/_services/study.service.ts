@@ -22,44 +22,48 @@ export class StudyService extends TableService<Study> implements OnDestroy {
   }
 
   downloadConsent(studyId: number): Observable<any> {
-    return this.http.get(this.API_URL+'/'+studyId+'/download-consent',{responseType: 'blob'});
+    return this.http.get(this.API_URL + '/' + studyId + '/download-consent', { responseType: 'blob'});
   }
   
   downloadBudget(studyId: number): Observable<any> {
-    return this.http.get(this.API_URL+'/'+studyId+'/download-budget',{responseType: 'blob'});
+    return this.http.get(this.API_URL + '/' + studyId + '/download-budget', { responseType: 'blob'});
   }
 
   uploadConsent(formData: FormData, studyId: number): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/signed-consent', formData, {
+    return this.http.post(this.API_URL + '/' + studyId + '/signed-consent', formData, {
       reportProgress: true,
       observe: 'events'
     });
   }
   
   uploadPaymentReceipt(formData: FormData, studyId: number): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/payment-receipt', formData);
+    return this.http.post(this.API_URL + '/' + studyId + '/payment-receipt', formData);
   }
   
   registerAppointment(studyId: number, reservation: Reservation): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/register-appointment', reservation);
+    return this.http.post(this.API_URL + '/' + studyId+'/register-appointment', reservation);
   }
 
   registerSample(studyId: number, registerSample: RegisterSample): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/register-sample', registerSample);
+    return this.http.post(this.API_URL + '/' + studyId + '/register-sample', registerSample);
   }
   
   registerPickupSample(studyId: number, picked_up_by: string): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/register-sample-pickup', picked_up_by);
+    return this.http.post(this.API_URL + '/' + studyId + '/register-sample-pickup', picked_up_by);
   }
   
-  registerReport(studyId: number, result:string, report: string): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/add-report', {result: result, report : report });
+  registerReport(studyId: number, result: string, report: string): Observable<any> {
+    return this.http.post(this.API_URL + '/' + studyId + '/add-report', { result: result, report : report });
   }
   
   sendReport(studyId: number): Observable<any> {
-    return this.http.post(this.API_URL+'/'+studyId+'/send-report', studyId);
+    return this.http.post(this.API_URL + '/' + studyId + '/send-report', studyId);
   }
-  
+
+  cancelPaymentReceipt(studyId: number): Observable<any> {
+    return this.http.post(this.API_URL + '/' + studyId + '/reject-payment-receipt', studyId);
+  }
+
 }
 
 @Injectable({
