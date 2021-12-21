@@ -3,6 +3,7 @@ import { BaseModel } from "../../../_metronic/shared/crud-table";
 import { ReferringPhysician } from "../../referring_physician/_models/referring-physician.model";
 import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
 import { NumericLiteral } from "typescript";
+import { SampleClearance } from "../../sample_clearance/_model/sample-clearance.model";
 
 export enum StudyState {
   STATE_ONE = "Esperando comprobante de pago",
@@ -68,6 +69,11 @@ export interface State {
   updated_by: User;
   state: string;
   state_entered_date: string;
+  state_patient_view: string;
+}
+export interface AppointmentList {
+  date_appointment: string;
+  description: string;
 }
 export interface StudyList {
   id: number;
@@ -80,4 +86,7 @@ export interface StudyList {
   current_state: string;
   states: State[];
   employee: Employee;
+  appointment: AppointmentList;
+  sample: SampleClearance;
+  current_state_patient_view: string;
 }

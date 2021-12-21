@@ -13,16 +13,18 @@ export class SampleBatchesService extends TableService<SampleBathes> implements 
   constructor(@Inject(HttpClient) http) {
     super(http);
   }
-  
-  registerSampleBatcheProcess(batchedId: number, url: string): Observable<any> {
-    
-    return this.http.post(this.API_URL+'/'+batchedId+'/mark-as-processed', url);
+
+  registerSampleBatcheProcess(batchedId: number, samplesIinsufficient: number[], url: string): Observable<any> {
+      console.log(samplesIinsufficient);
+      return this.http.post(this.API_URL + '/' + batchedId + '/mark-as-processed?url=' + url, samplesIinsufficient);
   }
-  
+
+  getSampleByBatchesId(batchedId: number): Observable<SampleBathes> {
+    return this.http.get<SampleBathes>(this.API_URL + '/' + batchedId);
+
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
 }
-
-   
-

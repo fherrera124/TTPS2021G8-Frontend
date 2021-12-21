@@ -23,8 +23,10 @@ const EMPTY_STUDY = Study.getEmpty();
   selector: "app-detail-study-modal",
   templateUrl: "./detail-study-modal.component.html",
 })
+
 export class DetailStudyModalComponent {
   @Input() study: StudyList;
+  @Input() userRol: string;
   constructor(public modal: NgbActiveModal, private studyService: StudyService ) {}
   
   downloadBudget(idStudy: number) {
