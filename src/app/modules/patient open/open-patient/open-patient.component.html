@@ -1,0 +1,66 @@
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">Registro de pacientes</h3>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <form action="#" class="form form-label-right" [formGroup]="formGroup">
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <app-input-form [formGroup]="formGroup" [placeholder]="'Nombre'" [name]="'first_name'" [minlength]="true" [maxLength]="true" [validationMinlength]="3" [validationMaxLength]="50"></app-input-form>
+        </div>
+        <div class="col-lg-6">
+          <app-input-form [formGroup]="formGroup" [placeholder]="'Apellido'" [name]="'last_name'" [minlength]="true" [maxLength]="true" [validationMinlength]="3" [validationMaxLength]="50"></app-input-form>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-6">
+          <app-input-form [formGroup]="formGroup" [placeholder]="'DNI'" [name]="'dni'" [type]="'text'" [minlength]="true" [maxLength]="true" [validationMinlength]="7" [validationMaxLength]="10"></app-input-form>
+        </div>
+        <div class="col-lg-6">
+          <app-date-picker-form [formGroup]="formGroup" [placeholder]="'Fecha de nacimiento'" [name]="'birth_date'" [required]="false" [requiredFem]="true"></app-date-picker-form>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-lg-4">
+          <app-input-form [formGroup]="formGroup" [placeholder]="isAdult() ? 'Email' : 'Email del tutor'" [name]="'email'" [type]="'email'" [email]="true"></app-input-form>
+        </div>
+        <div class="col-lg-4">
+          <app-input-form [formGroup]="formGroup" [placeholder]="isAdult() ? 'Teléfono' : 'Teléfono del tutor'" [name]="'phone_number'" [required]="true"></app-input-form>
+        </div>
+        <div class="col-lg-4">
+          <app-input-form [formGroup]="formGroup" [placeholder]="isAdult() ? 'Dirección' : 'Dirección del tutor'" [name]="'address'" [required]="true"></app-input-form>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="!isAdult()">
+        <div class="col-lg-6">
+          <app-input-form [formGroup]="formGroup" [placeholder]="'Nombre del tutor'" [name]="'first_name_tutor'" [minlength]="true" [maxLength]="true" [validationMinlength]="3" [validationMaxLength]="50"></app-input-form>
+        </div>
+        <div class="col-lg-6">
+          <app-input-form [formGroup]="formGroup" [placeholder]="'Apellido del tutor'" [name]="'last_name_tutor'" [minlength]="true" [maxLength]="true" [validationMinlength]="3" [validationMaxLength]="50"></app-input-form>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="card-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+    >
+    <a href="/auth/login">Cancelar</a>
+    </button>
+    <ng-container>
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+        [disabled]="formGroup.invalid"
+      >
+        Guardar
+      </button>
+    </ng-container>
+  </div>
+</div>

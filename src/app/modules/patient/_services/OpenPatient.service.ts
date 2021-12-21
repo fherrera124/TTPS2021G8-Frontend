@@ -21,17 +21,13 @@ export class PatientService extends TableService<Patient> implements OnDestroy {
   getAll(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.API_URL)
   }
-
-  createOpen(item: Patient): Observable<any> {
-    return super.create(item,this.API_URL + '/open');
-  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class HealthInsuranceService extends TableService<HealthInsurance> implements OnDestroy {
-  API_URL = `${environment.apiUrl}/health_insurances`;
+  API_URL = `${environment.apiUrl}/health_insurance`;
   constructor(@Inject(HttpClient) http) {
     super(http);
   }
@@ -41,6 +37,7 @@ export class HealthInsuranceService extends TableService<HealthInsurance> implem
   }
   
   getAll():Observable<HealthInsurance[]> {
-     return this.http.get<HealthInsurance[]>(this.API_URL);
+     return of([{id: 1, name:'OSDE'}, {id: 2, name:'IOMA'}])
+    // return this.http.get<HealthInsurance[]>(this.API_URL);
   } 
 }

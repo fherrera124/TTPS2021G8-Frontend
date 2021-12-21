@@ -1,66 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { AuthService } from '../_services/auth.service';
-import { first } from 'rxjs/operators';
-
-enum ErrorStates {
-  NotSubmitted,
-  HasError,
-  NoError,
-}
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Observable, Subscription } from "rxjs";
+import { AuthService } from "../_services/auth.service";
+import { first } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { EmployeeService } from "../../employee/_services";
+import { PatientService } from "../../patient/_services";
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss'],
+  selector: "app-forgot-password",
+  templateUrl: "./forgot-password.component.html",
 })
 export class ForgotPasswordComponent implements OnInit {
-  forgotPasswordForm: FormGroup;
-  errorState: ErrorStates = ErrorStates.NotSubmitted;
-  errorStates = ErrorStates;
-  isLoading$: Observable<boolean>;
+  isLoading$;
+  formGroup: FormGroup;
+  password = "";
 
-  // private fields
-  private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
-  ) {
-    this.isLoading$ = this.authService.isLoading$;
-  }
-
+    private authService: AuthService,
+    private router: Router,
+    private patientService: PatientService
+  ) {}
   ngOnInit(): void {
-    this.initForm();
+    this.loadForm();
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.forgotPasswordForm.controls;
-  }
-
-  initForm() {
-    this.forgotPasswordForm = this.fb.group({
-      email: [
-        'admin@demo.com',
+  loadForm() {
+    this.formGroup = this.fb.group({
+      password: [
+        this.password,
         Validators.compose([
           Validators.required,
-          Validators.email,
           Validators.minLength(3),
-          Validators.maxLength(320), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+          Validators.maxLength(50),
         ]),
       ],
     });
   }
 
-  submit() {
-    this.errorState = ErrorStates.NotSubmitted;
-    const forgotPasswordSubscr = this.authService
-      .forgotPassword(this.f.email.value)
-      .pipe(first())
-      .subscribe((result: boolean) => {
-        this.errorState = result ? ErrorStates.NoError : ErrorStates.HasError;
+  save() {
+    let pwd = this.formGroup.get("password").value;
+    this.authService.forgotPassword(pwd).subscribe((r) => {
+      let userloged = this.authService.currentUserValue;
+      let param = { id: userloged.id, force_password_change: false };
+      this.patientService.update(param).subscribe((res) => {
+        this.router.navigateByUrl("/dashboard");
       });
-    this.unsubscribe.push(forgotPasswordSubscr);
+    });
   }
 }

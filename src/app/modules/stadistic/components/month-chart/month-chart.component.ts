@@ -23,13 +23,6 @@ export class MonthChartComponent implements OnInit {
     { data: [], label: '' }
   ];
 
-  myControl: FormControl = new FormControl();
-  options = [
-      'bar',
-      'line',
-      'radar'
-  ];
-
 
   constructor(private studyService: StudyService, injector: Injector) {
     this.changeDetectorRef = injector.get(ChangeDetectorRef);
@@ -45,8 +38,10 @@ export class MonthChartComponent implements OnInit {
         })
   }
 
-  valueChange($event) {
-    this.perMonthChartType = $event.source.value;
+  changeType(type: ChartType) {
+    this.perMonthChartType = type;
   }
+
+
 
 }

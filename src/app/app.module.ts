@@ -46,7 +46,7 @@ function appInitializer(authService: AuthService) {
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    CRUDTableModule
+    CRUDTableModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptService, multi: true },

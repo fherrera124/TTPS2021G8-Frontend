@@ -1,5 +1,5 @@
 <!--begin::Signin-->
-<div class="login-form login-signin">
+<div class="login-form login-signin pb-3">
   <!--begin::Form-->
   <form
     class="form"
@@ -117,22 +117,7 @@
           control: loginForm.controls['password']
         }"
       ></ng-container>
-      <!-- <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'minlength',
-          message: 'Password should have at least 3 symbols',
-          control: loginForm.controls['password']
-        }"
-      ></ng-container>
-      <ng-container
-        [ngTemplateOutlet]="formError"
-        [ngTemplateOutletContext]="{
-          validation: 'maxLength',
-          message: 'Password should have maximum 100 symbols',
-          control: loginForm.controls['password']
-        }"
-      ></ng-container> -->
+
     </div>
     <!--end::Form group-->
 
@@ -161,9 +146,14 @@
         <span class="spinner spinner-primary ml-5"></span>
       </ng-container>
     </div>
+    
     <!--end::Action-->
   </form>
   <!--end::Form-->
+
+</div>
+<div class="d-flex justify-content-lg-start justify-content-center py-7 py-lg-0 mb-5">
+  <a href="/open-patient/create" class="text-primary font-weight-bolder font-size-h5">Registrar nuevo paciente</a>
 </div>
 <!--end::Signin-->
 

@@ -4,6 +4,11 @@ import { AuthGuard } from './modules/auth/_services/auth.guard';
 
 export const routes: Routes = [
   {
+    path: 'open-patient',
+    loadChildren: () =>
+      import('./modules/patient open/open-patient.module').then((m) => m.OpenPatientModule),
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),

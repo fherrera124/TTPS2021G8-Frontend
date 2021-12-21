@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { BaseChartDirective, Label } from 'ng2-charts';
-import { StudyService } from 'src/app/modules/study/_services';
+import { Component, OnInit } from '@angular/core';
+import { AuthService, UserModel } from 'src/app/modules/auth';
+import { AuthModel } from 'src/app/modules/auth/_models/auth.model';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +9,19 @@ import { StudyService } from 'src/app/modules/study/_services';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  user:UserModel
+  role: string;
 
-
-  constructor() {
+  constructor(private authService:AuthService) {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getAuthFromLocalStorage().role;
+    this.user = this.authService.currentUserValue;
+  }
+
+  isEmployee() {
+    return this.role == "EMPLOYEE";
   }
 
 }
