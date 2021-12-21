@@ -1,11 +1,27 @@
-<div class="card card-custom gutter-b">
-  <div class="card-header">
-    <div class="card-title">
-      <h3 class="card-label">Estadísticas</h3>
-    </div>
-    <div class="card-toolbar"></div>
-  </div>
-  <type-chart></type-chart>
-  <month-chart></month-chart>
 
-</div>
+<ng-container *ngIf="isEmployee()">
+  <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Estadísticas</h3>
+      </div>
+      <div class="card-toolbar"></div>
+    </div>
+    <type-chart></type-chart>
+    <month-chart></month-chart>
+  
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!isEmployee()">
+  <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">Bienvenido {{user.first_name + " "+ user.last_name}}</h3>
+      </div>
+      <div class="card-toolbar"></div>
+    </div>
+  
+  </div>
+</ng-container>
+

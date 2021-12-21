@@ -51,11 +51,11 @@
           </div>
           
           <div class="col-lg-4">
-            <app-select-form [items]="itemsHealthInsurance" [selectedItem]="getSelectedItem(itemsHealthInsurance,patient.id)" [name]="'health_insurance'" [placeholder]="'Obra Social'" [formGroup]="formGroup">
+            <app-select-form [items]="itemsHealthInsurance" [selectedItem]="getSelectedItem(itemsHealthInsurance,patient.id)" [name]="'health_insurance_id'" [placeholder]="'Obra Social'" [formGroup]="formGroup">
             </app-select-form>
           </div>
           <div class="col-lg-4">
-            <app-input-form [formGroup]="formGroup" [placeholder]="'Obra social'" [name]="'health_insurance_number'" [required]="false"></app-input-form>
+            <app-input-form [type]="'number'" [formGroup]="formGroup" [placeholder]="'Número de obra social'" [name]="'health_insurance_number'" [required]="false"></app-input-form>
           </div>
         </div>
       </form>

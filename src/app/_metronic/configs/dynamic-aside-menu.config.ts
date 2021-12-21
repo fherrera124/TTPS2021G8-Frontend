@@ -6,7 +6,7 @@ export const DynamicAsideMenuConfig = {
       icon: 'flaticon2-architecture-and-city',
       svg: './assets/media/svg/icons/Home/Home.svg',
       page: '/dashboard',
-      roles: ['ANONYMOUS'],
+      roles: ['EMPLOYEE'],
       translate: 'MENU.DASHBOARD',
       bullet: 'dot',
     },
