@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Reservation } from '../study-list/components/shift-reservation-modal/shift-reservation-modal.component';
 import { RegisterSample } from '../study-list/components/register-sample-modal/register-sample-modal.component';
+import { NumberValueAccessor } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,9 @@ export class TypeStudyService extends TableService<TypeStudy> implements OnDestr
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
   
+  getAll(): Observable<TypeStudy[]> {
+    return this.http.get<TypeStudy[]>(this.API_URL);
+  }
 }
 
 @Injectable({
@@ -96,6 +100,10 @@ export class DiagnosisService extends TableService<Diagnosis> implements OnDestr
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
+  
+  getAll():Observable<Diagnosis[]> {
+    return this.http.get<Diagnosis[]>(this.API_URL);
+  } 
 }
 
 @Injectable({
@@ -110,5 +118,19 @@ export class StudyListService extends TableService<StudyList> implements OnDestr
   ngOnDestroy() {
     this.subscriptions.forEach(sb => sb.unsubscribe());
   }
-   
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class StudyDelayedListService extends TableService<StudyList> implements OnDestroy {
+  API_URL = `${environment.apiUrl}/studies/delayed`;
+  constructor(@Inject(HttpClient) http) {
+    super(http);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sb => sb.unsubscribe());
+  }
 }

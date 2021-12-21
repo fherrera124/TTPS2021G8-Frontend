@@ -9,7 +9,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import { of, Subscription } from "rxjs";
 import { catchError, finalize, first, tap } from "rxjs/operators";
-import { Patient } from "../../../_models/patient.model";
+import { HealthInsurance, Patient } from "../../../_models/patient.model";
 import { PatientService } from "../../../_services";
 import {
   CustomAdapter,
@@ -17,6 +17,8 @@ import {
   getDateFromString,
 } from "../../../../../_metronic/core";
 import { ValidationErrors } from "src/app/modules/shared/validation-errors";
+import { Items } from "src/app/modules/shared/utils/items.model";
+import { HealthInsuranceService } from "../../../_services/patient.service";
 
 const EMPTY_PATIENT = Patient.getEmpty();
 
@@ -33,12 +35,14 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
   patient: Patient;
   formGroup: FormGroup;
   validationErrors: ValidationErrors = new ValidationErrors();
-
+  public itemsHealthInsurance: Items<string, HealthInsurance>[]
+  
   private subscriptions: Subscription[] = [];
   constructor(
     private patientService: PatientService,
     private fb: FormBuilder,
     public modal: NgbActiveModal,
+    private healthInsuranceService: HealthInsuranceService,
     config: NgbDatepickerConfig
   ) {
     // customize default values of datepickers used by this component tree
@@ -49,6 +53,9 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading$ = this.patientService.isLoading$;
     this.loadPatient();
+    this.healthInsuranceService.getAll().subscribe(healthInsurances => 
+      this.itemsHealthInsurance = healthInsurances.map(healthInsurancesItem => { return  {name: healthInsurancesItem.name ,value: healthInsurancesItem };})
+    )
   }
 
   loadPatient() {
@@ -118,6 +125,7 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
         Validators.compose([Validators.maxLength(255)]),
       ],
       health_insurance_number: [this.patient.health_insurance_number],
+      health_insurance_id: [this.patient.health_insurance_id],
     });
   }
 
@@ -163,6 +171,11 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
       )
       .subscribe((res: Patient) => (this.patient = res));
     this.subscriptions.push(sbCreate);
+  }
+  
+  getSelectedItem(items: Items<string, any>[], id: number){
+    if (items)
+      return items.find(it=> it.value.id == id);
   }
 
   ngOnDestroy(): void {

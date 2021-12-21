@@ -57,7 +57,8 @@ export class InterceptService implements HttpInterceptor {
         error => {
           if (error.status === 401 || error.status == 403) {
             localStorage.removeItem(this.authLocalStorageToken)
-            this.router.navigateByUrl('/authentication/login');
+        //    this.authService.currentUserSubject.next(undefined);
+            this.router.navigateByUrl('/auth/login');
             this.notShowError = true;
           }
           let errorWasShown = false;

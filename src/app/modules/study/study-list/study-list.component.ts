@@ -183,7 +183,7 @@ export class StudyListComponent
         if (result.status === CrudOperation.SUCCESS) {
           $.notify({
             title: '<strong>Registro exitoso.</strong>',
-            message: 'Se ha registrado correctamente el estudio'
+            message: 'Estudio registrado. Correo electrónico enviado con el presupuesto.'
           }, {
             type: 'success'
           }),
@@ -197,9 +197,8 @@ export class StudyListComponent
     modalRef.componentInstance.idStudy = idStudy;
     modalRef.result.then((result) =>
       {
-        
         if (result.status === CrudOperation.SUCCESS) {
-          setTimeout(()=>{this.studyListService.fetch()}, 2000)
+          setTimeout(()=>{this.studyListService.fetch()}, 3000);
           $.notify({
             title: '<strong>Registro exitoso.</strong>',
             message: 'Se ha registrado correctamente el consentimiento firmado'
@@ -214,8 +213,8 @@ export class StudyListComponent
   uploadPaymentReceipt(idStudy: number) {
     const modalRef = this.modalService.open(PaymentUploadModalComponent, { size: 'xl',keyboard: false});
     modalRef.componentInstance.idStudy = idStudy;
-    modalRef.result.then((result) =>
-        this.studyListService.fetch()
+    modalRef.result.then((result) => {
+        this.studyListService.fetch()}
         ,
         () => { }
       ).catch((res) => {});

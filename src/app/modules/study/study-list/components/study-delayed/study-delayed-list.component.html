@@ -1,10 +1,7 @@
 <div class="card card-custom gutter-b">
   <div class="card-header">
     <div class="card-title">
-      <h3 class="card-label">Estudios</h3>
-    </div>
-    <div class="card-toolbar">
-      <button type="button" class="btn btn-primary" (click)="create()">Crear estudio</button>
+      <h3 class="card-label">Estudios Demorados</h3>
     </div>
   </div>
   <div class="card-body">
@@ -16,6 +13,8 @@
             formControlName="searchTerm" /><small *ngIf="!isSearchingByState" class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
         </form>
         <br>
+      </div>
+      <div class="row">
         <div class="col-lg-6" >
           <select (change)="filterStatus()" *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" [disabled]="searchData !==''" [(ngModel)]="filterState" class="form-control form-control-lg"  name="filterState"> 
             <option value="Seleccione un estado" selected>Seleccione un estado</option>
@@ -40,14 +39,13 @@
     <div class="table-responsive angular-bootstrap-table">
       <table class="table table-head-custom table-vertical-center overflow-hidden">
         <thead>
-          <th>           </th>
           <th>
-            Estudio
+            Tipo de estudio
             <app-sort-icon column="type_study" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-            Estado
+            Estado actual
             <app-sort-icon column="current_state" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
@@ -57,12 +55,12 @@
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-            Médico
+            Médico derivante
             <app-sort-icon column="referring_physician" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
               (sort)="sort($event)"></app-sort-icon>
           </th>
           <th>
-              Diagnóstico
+              Diagnóstico presuntivo
               <app-sort-icon column="presumptive_diagnosis" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
                 (sort)="sort($event)"></app-sort-icon>
           </th>
@@ -71,24 +69,10 @@
               <app-sort-icon column="budget" [activeColumn]="sorting.column" [activeDirection]="sorting.direction"
                 (sort)="sort($event)"></app-sort-icon>
           </th>
-          <th>Acciones                </th>
+          <th>Acciones</th>
         </thead>
         <tbody>
-            <tr *ngFor="let study of studyListService.items$ | async">
-               <td style="display: flex;">
-                  <a title="Detalle" class="btn btn-icon btn-light  btn-sm mx-3"
-                    (click)="detail(study)">
-                    <span [inlineSVG]="'./assets/plugins/keenthemes-icons/svg/056-bold-sort.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md ">
-                    </span>
-                  </a>
-                  <a title="Editar" class="btn btn-icon btn-light  btn-sm mx-3"
-                    (click)="edit(study.id)">
-                    <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
-                      class="svg-icon svg-icon-md">
-                    </span>
-                  </a>
-              </td>
+            <tr *ngFor="let study of studyDelayedListService.items$ | async">
               <td>{{ study.type_study.name }}</td>
               <td>{{ study.current_state}}</td>
               <td>{{ study.patient.first_name }} {{ study.patient.last_name }} </td>
@@ -96,53 +80,12 @@
               <td>{{ study.presumptive_diagnosis.name }}</td>
               <td>{{ study.budget }}</td>
               <td style="display: flex;">
-                <a *ngIf="study.current_state === studyState.STATE_ONE" title="Subir comprobante de pago"
-                (click)="uploadPaymentReceipt(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir comprobante de pago">
-                    Subir comprobante de pago
+                <a title="Detalle" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                  (click)="detail(study)">
+                  <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
+                    class="svg-icon svg-icon-md svg-icon-primary">
                   </span>
                 </a>
-               <a *ngIf="study.current_state === studyState.STATE_TWO && userRol==='EMPLOYEE'" title="Subir consentimiento firmado"
-                (click)="uploadConsent(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Subir consentimiento firmado">
-                  Subir consentimiento firmado
-                </span>
-              </a>
-              <a *ngIf="study.current_state === studyState.STATE_THREE && userRol==='EMPLOYEE'" title="Esperando selección de turno"
-                (click)="showShiftReservation(study.id)">
-                <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando selección de turno">
-                  Esperando selección de turno
-                </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_FOUR && userRol==='EMPLOYEE'" title="Esperando toma de muestra" 
-              (click)="registerSample(study.id)">
-              <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando toma de muestra">
-                Esperando toma de muestra
-              </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_FIVE && userRol==='EMPLOYEE'" title="Esperando retiro muestra" 
-                 (click)="registerSamplePickup(study.id)">
-                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando retiro muestra">
-                  Esperando retiro muestra
-                </span>
-              </a>
-
-              <a *ngIf="study.current_state === studyState.STATE_EIGHT && userRol==='REPORTING_PHYSICIAN' "  title="Esperando interpretación de resultados e informes"
-                 (click)="registerReport(study.id)">
-                 <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer; " title="Esperando interpretación de resultados e informes">
-                  Esperando interpretación de resultados e informes
-                </span>
-              </a>
-              
-              <a *ngIf="study.current_state === studyState.STATE_NINE && userRol==='EMPLOYEE'" title="Envíar reporte"
-              (click)="confirmSendReport(study.id)">
-               <span class="badge bg-dark" style="color: blanchedalmond;  cursor: pointer;"  title="Envíar reporte">
-                Envíar reporte
-              </span>
-
-              </a>
             </td>
           </tr>
         </tbody>

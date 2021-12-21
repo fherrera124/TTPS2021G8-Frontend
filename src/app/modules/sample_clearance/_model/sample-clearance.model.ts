@@ -8,3 +8,8 @@ export interface SampleClearance{
     sample_batch_id: number,
     paid: boolean
 }
+
+
+export interface SampleSelected {
+    id: number
+  }
