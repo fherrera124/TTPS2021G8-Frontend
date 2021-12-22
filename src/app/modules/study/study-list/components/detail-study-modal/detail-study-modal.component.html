@@ -98,7 +98,7 @@
         <tbody>
           <tr *ngFor="let state of study.states">
             <td>{{ state.updated_by.first_name }} {{ state.updated_by.last_name }}</td>
-            <td>{{ state.state_patient_view ? state.state_patient_view :state.state}} </td>
+            <td>{{ userRol === 'EMPLOYEE' ?state.state: state.state_patient_view}} </td>
             <td>{{ state.state_entered_date | date: 'dd-MM-yyyy, h:mm a'}}</td>
           </tr>
         </tbody>
