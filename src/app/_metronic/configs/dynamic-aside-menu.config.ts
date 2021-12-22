@@ -54,11 +54,6 @@ export const DynamicAsideMenuConfig = {
         {
           title: 'Lista de Estudios',
           page: '/studies/studies'
-        },
-        {
-          title: 'Estudios Demorados',
-          page: '/studies/studies-delayed',
-          roles_not_allowed:['REPORTING_PHYSICIAN']
         }
       ]
     },
@@ -136,9 +131,9 @@ export const DynamicAsideMenuConfig = {
           page: '/type-studies/type-studies',
         },
         {
-            title: 'Lista de obras sociales',
-            page: '/health-insurances/health-insurances'
-          },
+          title: 'Estudios Demorados',
+          page: '/studies/studies-delayed'
+        }
       ]
     }
   ]
