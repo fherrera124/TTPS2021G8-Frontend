@@ -58,7 +58,7 @@
         <tbody>
           <tr *ngFor="let sampleClearance of samplesClearance">
             <td>{{ sampleClearance.sample_batch_id}}</td>
-            <td>{{ sampleClearance.picked_up_date}}</td>
+            <td>{{ sampleClearance.picked_up_date | date: "dd-MM-yyyy, h:mm a"}}</td>
             <td>{{ sampleClearance.picked_up_by}}</td>
             <td>{{ sampleClearance.ml_extracted}}</td>
             <td>{{ sampleClearance.freezer_number}}</td>
