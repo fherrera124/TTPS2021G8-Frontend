@@ -8,6 +8,7 @@ import {
   NgbDatepickerModule,
   NgbModalModule,
 } from "@ng-bootstrap/ng-bootstrap";
+import { MatTabsModule } from "@angular/material/tabs";
 import { EditStudyModalComponent } from "./study-list/components/edit-study-modal/edit-study-modal.component";
 import { StudyRoutingModule } from "./study-routing.module";
 import { StudyComponent } from "./study.component";
@@ -25,6 +26,7 @@ import { ConfirmSendReportModalComponent } from "./study-list/components/confirm
 import { DetailStudyModalComponent } from "./study-list/components/detail-study-modal/detail-study-modal.component";
 import { StudyDelayedListComponent } from "./study-list/components/study-delayed/study-delayed-list.component";
 import { RejectPaymentReceiptModalComponent } from "./study-list/components/reject-payment-receipt-modal/reject-payment-receipt-modal";
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { RejectPaymentReceiptModalComponent } from "./study-list/components/reje
     ConfirmSendReportModalComponent,
     DetailStudyModalComponent,
     StudyDelayedListComponent,
-    RejectPaymentReceiptModalComponent
+    RejectPaymentReceiptModalComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,8 @@ import { RejectPaymentReceiptModalComponent } from "./study-list/components/reje
     SharedModule,
     MatDatepickerModule,
     MatIconModule,
+    MatTabsModule,
+    MatDividerModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
   ],
@@ -67,7 +71,7 @@ import { RejectPaymentReceiptModalComponent } from "./study-list/components/reje
     ConfirmSendReportModalComponent,
     DetailStudyModalComponent,
     StudyDelayedListComponent,
-    RejectPaymentReceiptModalComponent
+    RejectPaymentReceiptModalComponent,
   ],
   exports: [FroalaEditorModule, FroalaViewModule],
 

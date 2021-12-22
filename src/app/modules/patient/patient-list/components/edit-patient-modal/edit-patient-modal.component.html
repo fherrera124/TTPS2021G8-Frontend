@@ -22,7 +22,7 @@
     </ng-container>
 
     <ng-container *ngIf="patient">
-      <form action="#" class="form form-label-right" [formGroup]="formGroup">
+      <form action="#" class="form form-label-right" [formGroup]="formGroup" autocomplete="off">
         <div class="form-group row">
           <div class="col-lg-4">
             <app-input-form [formGroup]="formGroup" [placeholder]="'Nombre'" [name]="'first_name'" [minlength]="true" [maxLength]="true" [validationMinlength]="3" [validationMaxLength]="50"></app-input-form>
@@ -54,7 +54,7 @@
             <app-select-form [items]="itemsHealthInsurance" [selectedItem]="getSelectedItem(itemsHealthInsurance,patient.id)" [name]="'health_insurance_id'" [placeholder]="'Obra Social'" [formGroup]="formGroup">
             </app-select-form>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4" *ngIf="HIselected()">
             <app-input-form [type]="'number'" [formGroup]="formGroup" [placeholder]="'Número de obra social'" [name]="'health_insurance_number'" [required]="false"></app-input-form>
           </div>
         </div>
