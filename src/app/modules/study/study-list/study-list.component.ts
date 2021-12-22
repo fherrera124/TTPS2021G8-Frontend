@@ -19,7 +19,7 @@ import {
 
 import { EditStudyModalComponent } from './components/edit-study-modal/edit-study-modal.component';
 import { StudyListService, StudyService } from '../_services/study.service';
-import { StudyList, StudyState } from '../_models/study.model';
+import { StudyList, StudyState, StudyStatePatient } from '../_models/study.model';
 import { ConsentUploadModalComponent } from './components/consent-upload-modal/consent-upload-modal.component';
 import * as jQuery from 'jquery';
 import 'bootstrap-notify';
@@ -58,6 +58,9 @@ export class StudyListComponent
   public userRol:string;
   private subscriptions: Subscription[] = [];
   public studyState: typeof StudyState = StudyState;
+  public studyStatePatient: typeof StudyStatePatient = StudyStatePatient;
+ 
+  
   public filterState = 'Seleccione un estado';
   public isSearchingByState = false;
   public searchData = '';
@@ -74,7 +77,6 @@ export class StudyListComponent
   ngOnInit(): void {
     this.userRol = this.authService.getAuthFromLocalStorage().role;
     
-    console.log(this.userRol);
     this.filterForm();
     this.searchForm();
     this.studyListService.fetch();
