@@ -71,6 +71,13 @@ const routes: Routes = [
             (m) => m.TypeStudyModule
           ),
       },
+      {
+        path: 'health-insurances',
+        loadChildren: () =>
+          import('../modules/health_insurances/health-insurances.module').then(
+            (m) => m.HealthInsurancesModule
+          ),
+      },
         {
         path: '',
         redirectTo: '/dashboard',

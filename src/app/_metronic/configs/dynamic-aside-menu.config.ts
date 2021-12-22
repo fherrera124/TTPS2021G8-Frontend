@@ -133,8 +133,12 @@ export const DynamicAsideMenuConfig = {
       submenu: [
         {
           title: 'Lista de tipo de estudios',
-          page: '/type-studies/type-studies'
+          page: '/type-studies/type-studies',
         },
+        {
+            title: 'Lista de obras sociales',
+            page: '/health-insurances/health-insurances'
+          },
       ]
     }
   ]
