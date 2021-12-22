@@ -133,9 +133,25 @@ export const DynamicAsideMenuConfig = {
       submenu: [
         {
           title: 'Lista de tipo de estudios',
-          page: '/type-studies/type-studies'
-        },
+          page: '/type-studies/type-studies',
+        }
+      ]
+    },
+    {
+      title: 'Obras sociales',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/General/User.svg',
+      page: '/type-studies',
+      roles: ['CONFIGURATOR'],
+      submenu: [
+        {
+            title: 'Lista de obras sociales',
+            page: '/health-insurances/health-insurances'
+          }
       ]
     }
+
   ]
 };

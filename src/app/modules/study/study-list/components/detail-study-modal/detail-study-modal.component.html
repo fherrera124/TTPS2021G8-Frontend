@@ -171,21 +171,15 @@
   </div>
   <div class="modal-footer">
     <button
-      type="button"
-      class="btn btn-info mr-2"
-      style="font-size: small"
-      (click)="downloadConsent(study.id)"
-      *ngIf="enableDownload()"
-    >
-      Descargar consentimiento firmado
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="downloadBudget(study.id)"
-    >
-      Descargar presupuesto
-    </button>
+    type="button"
+    class="btn btn-info mr-2"
+    style="font-size: small;"
+    (click)="downloadConsent(study.id)"
+    *ngIf="enableDownload()"
+  >
+    Descargar consentimiento informado
+  </button>
+    <button type="button" class="btn btn-primary" (click)="downloadBudget(study.id)">Descargar presupuesto</button>
     <button
       type="button"
       class="btn btn-light btn-elevate mr-2"
