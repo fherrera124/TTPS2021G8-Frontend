@@ -54,6 +54,11 @@ export const DynamicAsideMenuConfig = {
         {
           title: 'Lista de Estudios',
           page: '/studies/studies'
+        },
+        {
+          title: 'Estudios Demorados',
+          page: '/studies/studies-delayed',
+          roles_not_allowed:['REPORTING_PHYSICIAN']
         }
       ]
     },
@@ -129,12 +134,24 @@ export const DynamicAsideMenuConfig = {
         {
           title: 'Lista de tipo de estudios',
           page: '/type-studies/type-studies',
-        },
-        {
-          title: 'Estudios Demorados',
-          page: '/studies/studies-delayed'
         }
       ]
+    },
+    {
+      title: 'Obras sociales',
+      root: true,
+      bullet: 'dot',
+      icon: 'flaticon2-user-outline-symbol',
+      svg: './assets/media/svg/icons/General/User.svg',
+      page: '/type-studies',
+      roles: ['CONFIGURATOR'],
+      submenu: [
+        {
+            title: 'Lista de obras sociales',
+            page: '/health-insurances/health-insurances'
+          }
+      ]
     }
+
   ]
 };
