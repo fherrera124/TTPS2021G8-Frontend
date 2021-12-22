@@ -57,7 +57,8 @@ export const DynamicAsideMenuConfig = {
         },
         {
           title: 'Estudios Demorados',
-          page: '/studies/studies-delayed'
+          page: '/studies/studies-delayed',
+          roles_not_allowed:['REPORTING_PHYSICIAN']
         }
       ]
     },

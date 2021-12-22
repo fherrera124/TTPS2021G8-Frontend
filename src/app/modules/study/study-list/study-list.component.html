@@ -16,7 +16,7 @@
             formControlName="searchTerm" /><small *ngIf="!isSearchingByState" class="form-text text-muted"><b>Buscar</b> en todos los campos</small>
         </form>
         <br>
-        <div class="col-lg-6" >
+        <div *ngIf="userRol !== 'REPORTING_PHYSICIAN'" class="col-lg-6" >
           <select (change)="filterStatus()" *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" [disabled]="searchData !==''" [(ngModel)]="filterState" class="form-control form-control-lg"  name="filterState"> 
             <option value="Seleccione un estado" selected>Seleccione un estado</option>
             <option value="{{studyState.STATE_ONE}}">{{studyState.STATE_ONE}}</option>
@@ -29,8 +29,8 @@
             <option value="{{studyState.STATE_EIGHT}}">{{studyState.STATE_EIGHT}}</option>
             <option value="{{studyState.STATE_NINE}}">{{studyState.STATE_NINE}}</option>
             <option value="{{studyState.STATE_ENDED}}">{{studyState.STATE_ENDED}}</option>
-        </select>
-        <small *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" class="form-text text-muted"><b>Filtrar</b> por estado</small>  
+          </select>
+          <small *ngIf="(isSearchingByState || filterState === 'Seleccione un estado') && searchData ===''" class="form-text text-muted"><b>Filtrar</b> por estado</small>  
       </div>        
     </div>
 
@@ -75,8 +75,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let study of studyListService.items$ | async">
-               <td style="display: flex;">
-                  <a title="Detalle" class="btn btn-icon btn-light  btn-sm mx-3"
+               <td  style="display: flex;">
+                  <a *ngIf="userRol !=='REPORTING_PHYSICIAN'" title="Detalle" class="btn btn-icon btn-light  btn-sm mx-3"
                     (click)="detail(study)">
                     <span [inlineSVG]="'./assets/plugins/keenthemes-icons/svg/056-bold-sort.svg'" cacheSVG="true"
                       class="svg-icon svg-icon-md ">
