@@ -64,7 +64,17 @@ export class AsideDynamicComponent implements OnInit, OnDestroy {
 
     // menu load
     const menuSubscr = this.menu.menuConfig$.subscribe(res => {
-      const filter_menu_items = [ ...res.items.filter(item => item.roles.includes('ANONYMOUS')), ...res.items.filter(item => item.roles.includes(this.authService.getAuthFromLocalStorage().role))];
+      
+      const filter_menu_items = [ 
+      ...res.items.filter(item => item.roles.includes('ANONYMOUS')), 
+      ...res.items.filter(item => item.roles.includes(this.authService.getAuthFromLocalStorage().role))];
+      filter_menu_items.forEach( item => {
+        if (item.submenu) {
+        item.submenu = item.submenu.filter (submenu => 
+          !submenu.roles_not_allowed || (
+          submenu.roles_not_allowed && !submenu.roles_not_allowed.includes(this.authService.getAuthFromLocalStorage().role)));
+        }
+      })
       this.menuConfig = {items: filter_menu_items};
       this.cdr.detectChanges();
     });

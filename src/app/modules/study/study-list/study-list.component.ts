@@ -73,6 +73,7 @@ export class StudyListComponent
 
   ngOnInit(): void {
     this.userRol = this.authService.getAuthFromLocalStorage().role;
+    
     console.log(this.userRol);
     this.filterForm();
     this.searchForm();
