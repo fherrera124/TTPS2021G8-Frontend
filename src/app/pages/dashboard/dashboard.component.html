@@ -29,4 +29,27 @@
   
   </div>
 </ng-container>
+<ng-container *ngIf="isConfigurator()">
+  <div class="card card-custom gutter-b">
+    <div class="card-body">
+      <h4 class="card-label" style="padding-bottom: 3em;">Configuración del sistema</h4>
+      <mat-slide-toggle [(ngModel)]="isChecked">Modo Obligado</mat-slide-toggle>
+      <div class="row" style="padding-top: 5em;">
+        <button
+          type="submit"
+          class="btn btn-primary btn-elevate"
+          (click)="save()"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="showAlert" class="alert alert-success" role="alert">
+      Modo guardado exitosamente!
+    </div>
+  
+  </div>
+</ng-container>
+
 

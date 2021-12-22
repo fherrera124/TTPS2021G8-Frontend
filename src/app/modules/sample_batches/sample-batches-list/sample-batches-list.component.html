@@ -39,7 +39,7 @@
         <tbody>
           <tr *ngFor="let sampleBatches of sampleBatchesService.items$ | async">
             <td>{{ sampleBatches.id}}</td>
-            <td>{{ sampleBatches.created_date}}</td>
+            <td>{{ sampleBatches.created_date | date: "dd-MM-yyyy, h:mm a"}}</td>
             <td>{{ sampleBatches.current_state}}</td>
             <td style="display: flex;">
               <a *ngIf ="sampleBatches.current_state == sampleBatchesState.STATE_ONE"  title="Procesar" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"

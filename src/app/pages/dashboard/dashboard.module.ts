@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardsModule } from '../../_metronic/partials/content/dashboards/dashboards.module';
 import { StadisticModule } from 'src/app/modules/stadistic/stadistic.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -16,7 +18,9 @@ import { StadisticModule } from 'src/app/modules/stadistic/stadistic.module';
       },
     ]),
     DashboardsModule,
-    StadisticModule
+    StadisticModule,
+    MatSlideToggleModule,
+    FormsModule
   ],
 })
 export class DashboardModule {}
