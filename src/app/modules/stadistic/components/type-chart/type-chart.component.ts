@@ -12,7 +12,15 @@ export class TypeChartComponent implements OnInit {
   @ViewChild(BaseChartDirective) typeChart: BaseChartDirective;
 
   public perTypeOptions: ChartOptions = {
-    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   };
   public perTypeLabels: Label[] = [];
   public perTypeChartType: ChartType = 'bar';
