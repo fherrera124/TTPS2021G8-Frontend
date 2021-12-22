@@ -3,7 +3,7 @@
     <div class="card-title">
       <h3 class="card-label">Estudios</h3>
     </div>
-    <div class="card-toolbar" *ngIf="userRol!=='PATIENT'">
+    <div class="card-toolbar" *ngIf="userRol === 'EMPLOYEE'">
       <button type="button" class="btn btn-primary" (click)="create()">Crear estudio</button>
     </div>
   </div>
