@@ -67,6 +67,10 @@ export class StudyService extends TableService<Study> implements OnDestroy {
   monthsAmount(): Observable<any> {
     return this.http.get(this.API_URL + '/months-amount');
   }
+
+  rejectPaymentReceipt(studyId: number): Observable<any> {
+    return this.http.post(this.API_URL+'/'+studyId+'/reject-payment-receipt', studyId);
+  }
   
 }
 
