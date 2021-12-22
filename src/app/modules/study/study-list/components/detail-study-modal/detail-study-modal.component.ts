@@ -36,5 +36,16 @@ export class DetailStudyModalComponent {
     });
 }
 
+downloadConsent(idStudy: number) {
+  this.studyService.downloadConsent(idStudy).subscribe(blobConsent => {
+    const fileURL = URL.createObjectURL(blobConsent);
+    window.open(fileURL, '_blank');
+    });
+}
+
+enableDownload() {
+  return this.study.states.some(s => s.state == "Esperando consentimiento firmado");
+}
+
     
 }
