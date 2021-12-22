@@ -24,6 +24,7 @@ import { FroalaEditorModule, FroalaViewModule } from "angular-froala-wysiwyg";
 import { ConfirmSendReportModalComponent } from "./study-list/components/confirm-send-report-modal/confirm-send-rerport-modal";
 import { DetailStudyModalComponent } from "./study-list/components/detail-study-modal/detail-study-modal.component";
 import { StudyDelayedListComponent } from "./study-list/components/study-delayed/study-delayed-list.component";
+import { RejectPaymentReceiptModalComponent } from "./study-list/components/reject-payment-receipt-modal/reject-payment-receipt-modal";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { StudyDelayedListComponent } from "./study-list/components/study-delayed
     RegisterReportModalComponent,
     ConfirmSendReportModalComponent,
     DetailStudyModalComponent,
-    StudyDelayedListComponent
+    StudyDelayedListComponent,
+    RejectPaymentReceiptModalComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,8 @@ import { StudyDelayedListComponent } from "./study-list/components/study-delayed
     RegisterSamplePickupModalComponent,
     ConfirmSendReportModalComponent,
     DetailStudyModalComponent,
-    StudyDelayedListComponent
+    StudyDelayedListComponent,
+    RejectPaymentReceiptModalComponent
   ],
   exports: [FroalaEditorModule, FroalaViewModule],
 

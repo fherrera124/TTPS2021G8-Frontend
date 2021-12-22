@@ -32,6 +32,7 @@ import { RegisterSampleModalComponent } from './components/register-sample-modal
 import { ConfirmSendReportModalComponent } from './components/confirm-send-report-modal/confirm-send-rerport-modal';
 import { DetailStudyModalComponent } from './components/detail-study-modal/detail-study-modal.component';
 import { ConfiguratorService } from '../../shared/service/configurator.service';
+import { RejectPaymentReceiptModalComponent } from './components/reject-payment-receipt-modal/reject-payment-receipt-modal';
 let $: any = jQuery;
 @Component({
   selector: 'app-study-list',
@@ -337,6 +338,16 @@ export class StudyListComponent
       const fileURL = URL.createObjectURL(blobConsent);
       window.open(fileURL, '_blank');
       });
+  }
+
+  rejectPaymentReceipt(idStudy: number) {
+    const modalRef = this.modalService.open(RejectPaymentReceiptModalComponent, { size: 'xl',keyboard: false});
+    modalRef.componentInstance.idStudy = idStudy;
+    modalRef.result.then((result) => {
+        this.studyListService.fetch()}
+        ,
+        () => { }
+      ).catch((res) => {});
   }
 
 }
