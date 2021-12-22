@@ -19,7 +19,17 @@ export enum StudyState {
   STATE_ONE_ERROR = "Anulado por falta de pago",
 }
 
-export interface TypeStudy {
+export enum StudyStatePatient {
+  STATE_ONE = "Esperando comprobante de pago",
+  STATE_ONE_ERROR = "Anulado por falta de pago",
+  STATE_TWO = "Esperando consentimiento firmado",
+  STATE_THREE = "Esperando selección de turno",
+  STATE_FOUR = "Esperando toma de muestra",
+  STATE_FIVE = "Esperando retiro de muestra",
+  STATE_SIX = "Esperando resultado",
+  STATE_ENDED = "Resultado completo",
+}
+  export interface TypeStudy {
   id: number;
   name: string;
 }
