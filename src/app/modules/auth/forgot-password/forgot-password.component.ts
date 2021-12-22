@@ -48,7 +48,7 @@ export class ForgotPasswordComponent implements OnInit {
       let userloged = this.authService.currentUserValue;
       let param = { id: userloged.id, force_password_change: false };
       this.patientService.update(param).subscribe((res) => {
-        this.router.navigate([this.returnUrl]);
+        this.authService.logout();
       });
     });
   }

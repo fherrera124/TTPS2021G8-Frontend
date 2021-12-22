@@ -48,7 +48,7 @@
             <br>
             <span>{{study.current_state_patient_view ? study.current_state_patient_view :study.current_state }}</span>          
           </div>
-          <div *ngIf="study.appointment.date_appointment" class="col-lg-2">
+          <div *ngIf="study.appointment && study.appointment.date_appointment" class="col-lg-2">
             <span><b>Turno: </b></span>
             <br>
             <span>{{study.appointment.date_appointment}}</span>          
