@@ -121,23 +121,7 @@ export const DynamicAsideMenuConfig = {
         },
       ]
  },
- ,
-     {
-      title: 'Médico informante',
-      root: true,
-      bullet: 'dot',
-      icon: 'flaticon2-user-outline-symbol',
-      svg: './assets/media/svg/icons/General/User.svg',
-      page: '/studies',
-      roles: ['ADMIN'],
-      submenu: [
-        {
-          title: 'Lista de médicos informantes',
-          page: '/referring-physician/referring-physician'
-        },
-      ]
- },
-    {
+ {
       title: 'Tipo de estudios',
       root: true,
       bullet: 'dot',
