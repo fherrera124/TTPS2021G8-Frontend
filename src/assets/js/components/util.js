@@ -139,7 +139,7 @@ export var KTUtil = function() {
     var breakpoints = {
         sm: 544, // Small screen / phone
         md: 768, // Medium screen / tablet
-        lg: 992, // Large screen / desktop
+        lg: 1100, // Large screen / desktop
         xl: 1200 // Extra large screen / wide desktop
     };
 

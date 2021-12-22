@@ -5,7 +5,7 @@ export const DefaultLayoutConfig =
     "breakpoints": {
       "sm": 576,
       "md": 768,
-      "lg": 992,
+      "lg": 1100,
       "xl": 1200,
       "xxl": 1400
     },

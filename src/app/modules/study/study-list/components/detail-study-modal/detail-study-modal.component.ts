@@ -22,6 +22,7 @@ const EMPTY_STUDY = Study.getEmpty();
 @Component({
   selector: "app-detail-study-modal",
   templateUrl: "./detail-study-modal.component.html",
+  styleUrls: ["./detail-study-modal.component.css"]
 })
 
 export class DetailStudyModalComponent {

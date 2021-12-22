@@ -178,6 +178,11 @@ export class EditPatientModalComponent implements OnInit, OnDestroy {
       return items.find(it=> it.value.id == id);
   }
 
+  HIselected() {
+    return this.formGroup.get('health_insurance_id').value !== undefined && this.formGroup.get('health_insurance_id').value !== null
+  }
+
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((sb) => sb.unsubscribe());
   }

@@ -1,109 +1,173 @@
 <div class="modal-content">
   <div class="modal-header">
     <div class="modal-title h4" id="example-modal-sizes-title-lg">
-      <ng-container >
-         Detalle de estudio
-      </ng-container>
+      <ng-container> Detalle de estudio </ng-container>
     </div>
   </div>
   <div
     class="overlay overlay-block cursor-default modal-body"
-    style="min-height: 400px">
-    <ng-container >
-        <div class="form-group row">
-          <div class="col-lg-2">
-            <span><b>Tipo de Estudio</b></span>
-            <br>
-            <span>{{study.type_study.name}}</span>
+    style="min-height: 400px"
+  >
+    <mat-tab-group>
+      <mat-tab label="Datos del estudio">
+        <ng-container>
+          <div class="form-group row">
+            <div class="col">
+              <h4>Datos generales</h4>
+            </div>
           </div>
-          <div class="col-lg-2">
-            <span><b>Paciente: </b></span>
-            <br>
-            <span >{{study.patient.first_name}}, {{study.patient.last_name}}</span>
+          <div class="form-group row">
+            <div class="col">
+              <span><b>Estado: </b></span>
+              <br />
+              <span>{{
+                study.current_state_patient_view
+                  ? study.current_state_patient_view
+                  : study.current_state
+              }}</span>
+            </div>
+
+            <div class="col">
+              <span><b>Tipo de Estudio</b></span>
+              <br />
+              <span>{{ study.type_study.name }}</span>
+            </div>
           </div>
-          <div *ngIf="study.patient.first_name_tutor" class="col-lg-2">
-            <span><b>Tutor: </b></span>
-            <br>
-            <span>{{study.patient.first_name_tutor}}, {{study.patient.last_name_tutor}}</span>
+          <div class="form-group row">
+            <div class="col">
+              <span><b>Paciente: </b></span>
+              <br />
+              <span
+                >{{ study.patient.first_name }},
+                {{ study.patient.last_name }}</span
+              >
+            </div>
+            <div *ngIf="study.patient.first_name_tutor" class="col">
+              <span><b>Tutor: </b></span>
+              <br />
+              <span
+                >{{ study.patient.first_name_tutor }},
+                {{ study.patient.last_name_tutor }}</span
+              >
+            </div>
+            <div class="col">
+              <span><b>Médico derivante: </b></span>
+              <br />
+              <span
+                >{{ study.referring_physician.first_name }},
+                {{ study.referring_physician.last_name }}</span
+              >
+            </div>
           </div>
-          <div class="col-lg-4">
-            <span><b>Médico derivante: </b></span>
-            <br>
-            <span>{{study.referring_physician.first_name}}, {{study.referring_physician.last_name}}</span>          
-          </div>
-        </div>
-        <div class="form-group row">  
-          <div class="col-lg-2">
-            <span><b>Diagnóstico: </b></span>
-            <br>
-            <span>{{study.presumptive_diagnosis.name}}</span>          
-          </div>
-          <div class="col-lg-2">
-            <span><b>Presupuesto: </b></span>
-            <br>
-            <span>{{study.budget}}</span>          
-          </div>
-          <div class="col-lg-2">
-            <span><b>Estado: </b></span>
-            <br>
-            <span>{{study.current_state_patient_view ? study.current_state_patient_view :study.current_state }}</span>          
-          </div>
-          <div *ngIf="study.appointment && study.appointment.date_appointment" class="col-lg-2">
-            <span><b>Turno: </b></span>
-            <br>
-            <span>{{study.appointment.date_appointment}}</span>          
-          </div>
-        </div>
-        <div *ngIf="study.sample" class="form-group row">
-          <div class="col-lg-2">
-            <span><b>Fecha de extracción: </b></span>
-            <br>
-            <span>{{study.sample.picked_up_date}}</span>
-          </div>
-          <div class="col-lg-2">
-            <span><b>Extraccionista: </b></span>
-            <br>
-            <span>{{study.sample.picked_up_by}}</span>          
-          </div>
-          <div *ngIf="userRol === 'EMPLOYEE'" class="col-lg-2">
-            <span><b>Ml extraidos: </b></span>
-            <br>
-            <span>{{study.sample.ml_extracted}}</span>          
-          </div>
-          <div *ngIf="userRol === 'EMPLOYEE'" class="col-lg-2">
-            <span><b>Nro de freezer: </b></span>
-            <br>
-            <span>{{study.sample.freezer_number}}</span>          
+          <mat-divider class="mb-4"></mat-divider>
+          <div class="form-group row">
+            <div class="col">
+              <h4>Datos presupuestarios</h4>
+            </div>
           </div>
 
-        </div>         
-    </ng-container>
-    <ng-container>
-      <ng-container >
-        <br>
-        <h5><u>Historial de pasos de estados</u></h5> 
-     </ng-container>
-      <table class="table table-head-custom table-vertical-center overflow-hidden">
-        <thead>
-          <th>
-            Usuario
-          </th>
-          <th>
-            Estado
-          </th>
-          <th>
-            Fecha de ingreo al estado
-          </th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let state of study.states">
-            <td>{{ state.updated_by.first_name }} {{ state.updated_by.last_name }}</td>
-            <td>{{ userRol === 'EMPLOYEE' ?state.state: state.state_patient_view}} </td>
-            <td>{{ state.state_entered_date | date: 'dd-MM-yyyy, h:mm a'}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
+          <div class="form-group row">
+            <div class="col">
+              <span><b>Diagnóstico: </b></span>
+              <br />
+              <span>{{ study.presumptive_diagnosis.name }}</span>
+            </div>
+            <div class="col">
+              <span><b>Presupuesto: </b></span>
+              <br />
+              <span>{{ "$ " + study.budget }}</span>
+            </div>
+          </div>
+          <mat-divider class="mb-4"></mat-divider>
+          <div class="form-group row">
+            <div class="col">
+              <h3>Informaci específicos</h3>
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <div
+              *ngIf="study.appointment && study.appointment.date_appointment"
+              class="col"
+            >
+              <span><b>Turno: </b></span>
+              <br />
+              <span>{{
+                study.appointment.date_appointment | date: "dd-MM-yyyy, h:mm a"
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="study.sample">
+
+              <div class="col">
+                <span><b>Fecha de extracción: </b></span>
+                <br />
+                <span>{{
+                  study.sample.picked_up_date | date: "dd-MM-yyyy, h:mm a"
+                }}</span>
+              </div>
+              <div class="col">
+                <span><b>Extraccionista: </b></span>
+                <br />
+                <span>{{ study.sample.picked_up_by }}</span>
+              </div>
+            </div>
+              <div class="form-group row" *ngIf="study.sample">
+                <div *ngIf="userRol === 'EMPLOYEE'" class="col">
+                  <span><b>Ml extraidos: </b></span>
+                  <br />
+                  <span>{{ study.sample.ml_extracted }}</span>
+                </div>
+                <div *ngIf="userRol === 'EMPLOYEE'" class="col">
+                  <span><b>Nro de freezer: </b></span>
+                  <br />
+                  <span>{{ study.sample.freezer_number }}</span>
+                </div>
+              </div>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Historial de estados">
+        <ng-container>
+          <ng-container>
+            <br />
+            <h3>Historial de pasos de estados</h3>
+          </ng-container>
+          <table
+            class="
+              table table-head-custom table-vertical-center
+              overflow-hidden
+            "
+          >
+            <thead>
+              <th>Usuario</th>
+              <th>Estado</th>
+              <th>Fecha de ingreo al estado</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let state of study.states; let i = index"
+                [className]="i % 2 == 0 ? 'backgroundGrey' : ''"
+              >
+                <td>
+                  {{ state.updated_by.first_name }}
+                  {{ state.updated_by.last_name }}
+                </td>
+                <td>
+                  {{
+                    userRol === "EMPLOYEE"
+                      ? state.state
+                      : state.state_patient_view
+                  }}
+                </td>
+                <td>
+                  {{ state.state_entered_date | date: "dd-MM-yyyy, h:mm a" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
   </div>
   <div class="modal-footer">
     <button
@@ -123,6 +187,5 @@
     >
       Cerrar
     </button>
-    
   </div>
 </div>
